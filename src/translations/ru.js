@@ -1,0 +1,170 @@
+export default {
+  // Login Page
+  login: 'Вход',
+  enterPhoneNumber: "Введите номер телефона",
+  phoneNumber: 'Номер телефона',
+  sendCode: "Отправить код",
+  useDifferentNumber: "Использовать другой номер",
+
+  // OTP Page
+  enterOtpCode: "Введите OTP код",
+  codeSentTo: "Код отправлен",
+  invalidOtp: "Неверный OTP код",
+  resendCode: "Отправить код повторно",
+  changePhoneNumber: "← Изменить номер телефона",
+
+  // Homepage
+  warehouseSystem: 'Склад',
+  welcome: "Добро пожаловать",
+  quickActions: "Быстрые действия",
+  createNewProduct: "Создать новый товар",
+  inventory: "Инвентаризация",
+  supplying: "Поставки",
+  expenses: "Расходы",
+
+  // Profile
+  profile: 'Профиль',
+  role: 'Роль',
+  status: 'Статус',
+  warehouseManager: 'Менеджер склада',
+  factoryManager: 'Менеджер фабрики',
+  active: 'Активен',
+  logout: 'Выйти',
+
+  // Coming soon messages
+  comingSoon: {
+    createProduct: "Создать новый товар - Скоро!",
+    inventory: "Инвентаризация - Скоро!",
+    supplying: "Поставки - Скоро!",
+    expenses: "Расходы - Скоро!"
+  },
+
+  // Inventory Pages
+  productTypes: "Типы продуктов",
+  selectProductType: "Выберите тип продукта",
+  products: "Продукты",
+  price: "Цена",
+  stock: "На складе",
+  receivedDate: "Дата получения",
+  noProducts: "В этой категории нет продуктов",
+  back: "Назад",
+  search: "Поиск",
+  searchProducts: "Поиск продуктов",
+  edit: "Редактировать",
+  restock: "Пополнить",
+  change: "Изменить",
+  save: "Сохранить",
+  delete: "Удалить",
+  cancel: "Отмена",
+  amount: "Количество",
+  productName: "Название продукта",
+  productType: "Тип продукта",
+  productCode: "Код продукта",
+  warningLimit: "Предел предупреждения",
+  restockProduct: "Пополнить продукт",
+  editProduct: "Редактировать продукт",
+  deleteConfirm: "Вы уверены, что хотите удалить?",
+
+  // Supplying Pages
+  giveProducts: "Выдать продукты",
+  givenProductsList: "Список выданных продуктов",
+  selectRole: "Выберите должность",
+  selectEmployee: "Выберите сотрудника",
+  selectWorkCategory: "Выберите категорию работы",
+  role: "Должность",
+  employee: "Сотрудник",
+  workCategory: "Категория работы",
+  continue: "Продолжить",
+  supplyAmount: "Введите количество",
+  supply: "Выдать",
+  successTitle: "Успешно!",
+  successMessage: "Продукт успешно выдан",
+  errorTitle: "Ошибка!",
+  errorMessage: "Что-то пошло не так",
+  close: "Закрыть",
+  givenTo: "Выдано",
+  givenDate: "Дата выдачи",
+  givenAmount: "Выдано количество",
+  statusWaiting: "Ожидание",
+  statusReceived: "Получено",
+  cancelTransaction: "Отменить",
+  returnProducts: "Вернуть",
+  returnAmount: "Возвращаемое количество",
+  returnProduct: "Возврат продукта",
+
+  // Factory Manager Pages
+  homepage: "Главная",
+  statistics: "Статистика",
+  reports: "Отчеты",
+  confirmed: "Подтверждено",
+  unconfirmed: "Неподтверждено",
+  totalCount: "Всего",
+  takenMoney: "Получено денег",
+  remainingDebt: "Остаток долга",
+  orderNumber: "Номер заказа",
+  dressName: "Название платья",
+  salonName: "Название салона",
+  searchOrders: "Поиск заказов",
+  noOrders: "Заказы не найдены",
+  weddingDate: "Дата свадьбы",
+
+  // Statistics Page
+  dailyReports: "Ежедневные отчеты",
+  from: "С",
+  to: "До",
+  totalOrders: "Всего заказов",
+  confirmedOrders: "Подтвержденные",
+  unconfirmedOrders: "Неподтвержденные",
+  rejectedOrders: "Отклоненные",
+
+  // Order Details Page
+  orderDetails: "Детали заказа",
+  gallery: "Галерея",
+  dressDetails: "Информация о платье",
+  salonDetails: "Информация о салоне",
+  shoulderMeasurement: "Размер плеч",
+  color: "Цвет",
+  description: "Описание",
+  salonPhone: "Телефон салона",
+  debtGivingDate: "Дата выдачи долга",
+  deliveryNeeded: "Требуется доставка",
+  brideDeliveryDate: "Дата доставки невесте",
+  yes: "Да",
+  no: "Нет",
+  processCompleted: "Процесс завершен",
+  noImages: "Изображения не найдены",
+  order: "Заказ",
+
+  // Reports Page
+  viewReport: "Просмотр отчета",
+  dressesInShop: "Платья в магазине",
+  convertIdeaToDress: "Превратить идею в платье",
+  completedOrders: "Завершенные заказы",
+  ideas: "Идеи",
+  ideaName: "Название идеи",
+  noDresses: "Платья не найдены",
+  noIdeas: "Идеи не найдены",
+
+  // Dress Details Page
+  aboutDress: "О платье",
+  addedDate: "Дата добавления",
+  whoAdded: "Кто добавил",
+  author: "Автор",
+  editDress: "Редактировать",
+  deleteDress: "Удалить",
+
+  // Idea Details Page
+  ideaDetails: "Детали идеи",
+  assignedTasks: "Назначенные задачи",
+  additionalInfo: "Дополнительная информация",
+  reject: "Отклонить",
+  approve: "Утвердить",
+  rejectConfirm: "Вы действительно хотите отклонить?",
+  approveConfirm: "Вы действительно хотите утвердить?",
+
+  // Keyboard
+  keyboard: {
+    space: "Пробел",
+    done: "Готово"
+  }
+};
