@@ -20,6 +20,7 @@ const DressDetails = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     fetchDressDetails();
@@ -72,7 +73,7 @@ const DressDetails = () => {
   };
 
   const handleDelete = async () => {
-    setShowDeleteModal(false);
+    setDeleting(true);
     try {
       await deleteDress(id);
       console.log('✅ Dress Deleted');
@@ -81,6 +82,8 @@ const DressDetails = () => {
       console.error('❌ Failed to delete dress:', err);
       setErrorMessage('Failed to delete dress');
       setShowError(true);
+      setDeleting(false);
+      setShowDeleteModal(false);
     }
   };
 
@@ -336,17 +339,26 @@ const DressDetails = () => {
             <div className="flex gap-4">
               <button
                 onClick={() => setShowDeleteModal(false)}
+                disabled={deleting}
                 className="flex-1 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold
-                  active:scale-[0.98] transition-all"
+                  active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {t.cancel}
               </button>
               <button
                 onClick={handleDelete}
+                disabled={deleting}
                 className="flex-1 py-3 bg-red-600 text-white rounded-xl font-semibold
-                  active:scale-[0.98] transition-all"
+                  active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                OK
+                {deleting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full" />
+                    {t.deleting || 'Deleting...'}
+                  </span>
+                ) : (
+                  'OK'
+                )}
               </button>
             </div>
           </div>

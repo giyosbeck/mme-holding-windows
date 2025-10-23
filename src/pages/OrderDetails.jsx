@@ -400,17 +400,26 @@ const OrderDetails = () => {
             <div className="flex gap-4">
               <button
                 onClick={handleCancelComplete}
+                disabled={completingProcess}
                 className="flex-1 h-14 rounded-xl border-2 border-gray-200 text-gray-700
-                  font-semibold text-lg active:scale-[0.98] transition-all"
+                  font-semibold text-lg active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {t.cancel}
               </button>
               <button
                 onClick={handleConfirmComplete}
+                disabled={completingProcess}
                 className="flex-1 h-14 rounded-xl bg-green-600 text-white
-                  font-semibold text-lg shadow-md active:scale-[0.98] active:bg-green-700 transition-all"
+                  font-semibold text-lg shadow-md active:scale-[0.98] active:bg-green-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                OK
+                {completingProcess ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full" />
+                    {t.completing || 'Completing...'}
+                  </span>
+                ) : (
+                  'OK'
+                )}
               </button>
             </div>
           </div>

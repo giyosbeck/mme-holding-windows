@@ -27,6 +27,11 @@ const SupplySelection = () => {
   const [loadingProjects, setLoadingProjects] = useState(false);
   const [error, setError] = useState('');
 
+  // Clear any previous selection when entering this page
+  useEffect(() => {
+    sessionStorage.removeItem('supplySelection');
+  }, []);
+
   // Fetch employees when role changes
   useEffect(() => {
     if (!selectedRole) {

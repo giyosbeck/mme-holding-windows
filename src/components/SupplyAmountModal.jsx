@@ -57,10 +57,9 @@ const SupplyAmountModal = ({ product, onClose }) => {
   const handleSuccessClose = () => {
     setShowSuccess(false);
     onClose();
-    // Clear selection
-    sessionStorage.removeItem('supplySelection');
-    // Navigate back to supplying home
-    navigate('/supplying');
+    // Keep selection alive for multiple supplies to same employee/project
+    // Navigate back to product categories
+    navigate('/supplying/product-types');
   };
 
   const handleErrorClose = () => {

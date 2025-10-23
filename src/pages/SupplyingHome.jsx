@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
 
 const SupplyingHome = () => {
   const navigate = useNavigate();
   const t = useTranslation();
+
+  // Clear supply selection when returning to home
+  useEffect(() => {
+    sessionStorage.removeItem('supplySelection');
+  }, []);
 
   const actions = [
     {

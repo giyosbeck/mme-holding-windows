@@ -17,6 +17,7 @@ const IdeaDetails = () => {
   const [showApproveModal, setShowApproveModal] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [actionLoading, setActionLoading] = useState(false);
 
   useEffect(() => {
     fetchIdeaDetails();
@@ -39,7 +40,7 @@ const IdeaDetails = () => {
   };
 
   const handleReject = async () => {
-    setShowRejectModal(false);
+    setActionLoading(true);
     try {
       await transferIdeaToDress(id, 'REJECTED');
       console.log('✅ Idea Rejected');
@@ -48,11 +49,13 @@ const IdeaDetails = () => {
       console.error('❌ Failed to reject idea:', err);
       setErrorMessage('Failed to reject idea');
       setShowError(true);
+      setActionLoading(false);
+      setShowRejectModal(false);
     }
   };
 
   const handleApprove = async () => {
-    setShowApproveModal(false);
+    setActionLoading(true);
     try {
       await transferIdeaToDress(id, 'TRANSFER');
       console.log('✅ Idea Approved');
@@ -61,6 +64,8 @@ const IdeaDetails = () => {
       console.error('❌ Failed to approve idea:', err);
       setErrorMessage('Failed to approve idea');
       setShowError(true);
+      setActionLoading(false);
+      setShowApproveModal(false);
     }
   };
 
@@ -235,17 +240,26 @@ const IdeaDetails = () => {
             <div className="flex gap-4">
               <button
                 onClick={() => setShowRejectModal(false)}
+                disabled={actionLoading}
                 className="flex-1 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold
-                  active:scale-[0.98] transition-all"
+                  active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {t.cancel}
               </button>
               <button
                 onClick={handleReject}
+                disabled={actionLoading}
                 className="flex-1 py-3 bg-red-600 text-white rounded-xl font-semibold
-                  active:scale-[0.98] transition-all"
+                  active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                OK
+                {actionLoading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full" />
+                    {t.rejecting || 'Rejecting...'}
+                  </span>
+                ) : (
+                  'OK'
+                )}
               </button>
             </div>
           </div>
@@ -271,17 +285,26 @@ const IdeaDetails = () => {
             <div className="flex gap-4">
               <button
                 onClick={() => setShowApproveModal(false)}
+                disabled={actionLoading}
                 className="flex-1 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold
-                  active:scale-[0.98] transition-all"
+                  active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {t.cancel}
               </button>
               <button
                 onClick={handleApprove}
+                disabled={actionLoading}
                 className="flex-1 py-3 bg-purple-600 text-white rounded-xl font-semibold
-                  active:scale-[0.98] transition-all"
+                  active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                OK
+                {actionLoading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full" />
+                    {t.approving || 'Approving...'}
+                  </span>
+                ) : (
+                  'OK'
+                )}
               </button>
             </div>
           </div>

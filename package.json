@@ -3,7 +3,7 @@
   "productName": "MME Warehouse",
   "description": "MME Holding warehouse and factory management system for POS devices",
   "author": "MME Holding",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "main": "electron/main.cjs",
@@ -30,8 +30,8 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "YOUR_GITHUB_USERNAME",
-      "repo": "mme-warehouse-windows",
+      "owner": "giyosbeck",
+      "repo": "mme-holding-windows",
       "releaseType": "release"
     },
     "win": {

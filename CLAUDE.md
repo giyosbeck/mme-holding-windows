@@ -165,6 +165,64 @@ import { getImageUrl } from '../services/api';
 <img src={getImageUrl(dress.dress_image)} />
 ```
 
+## Production Optimizations
+
+### Performance (Lazy Loading)
+All routes use React lazy loading to reduce initial bundle size:
+```javascript
+const PhoneInput = lazy(() => import('./pages/PhoneInput'));
+// Wrap routes in <Suspense fallback={<PageLoader />}>
+```
+- Initial load: ~50-80KB (down from 496KB)
+- Better performance on weak PCs
+
+### Network Resilience
+**API timeout & retry** (`src/services/api.js`):
+- 30-second timeout on all requests
+- 3 automatic retries with exponential backoff (1s, 2s, 4s)
+- Retries on: timeout, network errors, 5xx server errors
+- Total possible wait: up to 37 seconds
+
+**Offline detection** (`src/hooks/useNetworkStatus.js`):
+- `OfflineModal.jsx` shows when internet is lost
+- Success notification when connection restored
+
+### Auto-Update System
+**Implementation** (`electron/main.cjs` + `electron-updater`):
+- Checks for updates every 4 hours + on app start
+- Downloads updates from GitHub Releases
+- User sees notification with "Update" button
+- Auto-installs on app quit
+
+**Deployment**: Upload new release to GitHub → All POS devices auto-update
+
+### Loading States (Database Operations)
+**Pattern for confirmation modals:**
+```javascript
+const [actionLoading, setActionLoading] = useState(false);
+
+const handleAction = async () => {
+  setActionLoading(true);
+  try {
+    await apiCall();
+    navigate('/success');
+  } catch (err) {
+    setActionLoading(false);
+  }
+};
+
+<button disabled={actionLoading}>
+  {actionLoading ? (
+    <span className="flex items-center justify-center gap-2">
+      <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full" />
+      {t.loading || 'Loading...'}
+    </span>
+  ) : 'OK'}
+</button>
+```
+- Prevents button spam during slow network
+- Used in: IdeaDetails, DressDetails, OrderDetails
+
 ## Critical Issues Solved
 
 ### Issue #1: White/Blank Screen in Electron
