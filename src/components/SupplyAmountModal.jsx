@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
 import useLanguageStore from '../store/languageStore';
+import useUsageStore from '../store/usageStore';
 import { createSupply } from '../services/supplyApi';
 import { getImageUrl } from '../services/api';
 import { useKeyboard } from '../context/KeyboardContext';
@@ -11,6 +12,7 @@ const SupplyAmountModal = ({ product, onClose }) => {
   const t = useTranslation();
   const { language } = useLanguageStore();
   const { showKeyboard } = useKeyboard();
+  const { incrementProductUsage, incrementCategoryUsage } = useUsageStore();
   const [amount, setAmount] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -44,6 +46,11 @@ const SupplyAmountModal = ({ product, onClose }) => {
         selection.employeeId,
         parseFloat(amount)
       );
+
+      // Track usage on successful supply
+      incrementProductUsage(product.id);
+      incrementCategoryUsage(product.warehouse_product_category_id);
+
       setShowSuccess(true);
     } catch (err) {
       console.error('Failed to create supply:', err);

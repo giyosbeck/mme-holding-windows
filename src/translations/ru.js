@@ -64,6 +64,16 @@ export default {
   restockProduct: "Пополнить продукт",
   editProduct: "Редактировать продукт",
   deleteConfirm: "Вы уверены, что хотите удалить?",
+  hide: "Скрыть",
+  unhide: "Показать",
+  showHidden: "Показать скрытые",
+  hideHidden: "Скрыть скрытые",
+  hidden: "Скрыто",
+  categoryHidden: "Эта категория скрыта",
+  hideConfirm: "Вы уверены, что хотите скрыть?",
+  sortUsage: "Часто используемые",
+  sortApiOrder: "Порядок API",
+  sortAlphabetical: "A-Z",
 
   // Supplying Pages
   giveProducts: "Выдать продукты",

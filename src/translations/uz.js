@@ -64,6 +64,16 @@ export default {
   restockProduct: "Mahsulotni to'ldirish",
   editProduct: "Mahsulotni tahrirlash",
   deleteConfirm: "Rostdan ham o'chirmoqchimisiz?",
+  hide: "Yashirish",
+  unhide: "Ko'rsatish",
+  showHidden: "Yashirinlarni ko'rsatish",
+  hideHidden: "Yashirinlarni berkitish",
+  hidden: "Yashirilgan",
+  categoryHidden: "Bu kategoriya yashirilgan",
+  hideConfirm: "Rostdan ham yashirmoqchimisiz?",
+  sortUsage: "Ko'p ishlatilgan",
+  sortApiOrder: "Asl tartib",
+  sortAlphabetical: "A-Z",
 
   // Supplying Pages
   giveProducts: "Mahsulot berish",
