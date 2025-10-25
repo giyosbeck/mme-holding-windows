@@ -92,7 +92,13 @@ const UpdateNotification = () => {
             <h3 className="font-semibold text-lg mb-1">{t.updateError || 'Update Error'}</h3>
             <p className="text-sm opacity-90">{error}</p>
           </div>
-          <button onClick={handleDismiss} className="text-2xl hover:opacity-70 active:scale-95 transition-all">✕</button>
+          <button
+            onClick={handleDismiss}
+            className="min-w-[48px] min-h-[48px] flex items-center justify-center text-2xl
+              active:scale-95 active:opacity-70 transition-all rounded-lg"
+          >
+            ✕
+          </button>
         </div>
       </div>
     );
@@ -110,7 +116,13 @@ const UpdateNotification = () => {
               {t.newVersion || 'Version'} {updateInfo?.version}
             </p>
           </div>
-          <button onClick={handleDismiss} className="text-2xl hover:opacity-70 active:scale-95 transition-all">✕</button>
+          <button
+            onClick={handleDismiss}
+            className="min-w-[48px] min-h-[48px] flex items-center justify-center text-2xl
+              active:scale-95 active:opacity-70 transition-all rounded-lg"
+          >
+            ✕
+          </button>
         </div>
         <button
           onClick={handleDownload}
@@ -157,7 +169,13 @@ const UpdateNotification = () => {
               {t.restartToInstall || 'Restart to install the update'}
             </p>
           </div>
-          <button onClick={handleDismiss} className="text-2xl hover:opacity-70 active:scale-95 transition-all">✕</button>
+          <button
+            onClick={handleDismiss}
+            className="min-w-[48px] min-h-[48px] flex items-center justify-center text-2xl
+              active:scale-95 active:opacity-70 transition-all rounded-lg"
+          >
+            ✕
+          </button>
         </div>
         <button
           onClick={handleInstall}
