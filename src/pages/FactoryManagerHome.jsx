@@ -193,16 +193,13 @@ const FactoryManagerHome = () => {
             type="text"
             placeholder={t.searchOrders}
             value={searchQuery}
-            readOnly
-            onFocus={(e) => {
-              e.target.blur(); // Prevent physical keyboard
-              showKeyboard('text', searchQuery, setSearchQuery, () => {});
-            }}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => showKeyboard('text', searchQuery, setSearchQuery, () => {})}
             onClick={() => {
               showKeyboard('text', searchQuery, setSearchQuery, () => {});
             }}
             className="w-full h-16 px-6 text-lg rounded-xl border-2 border-gray-200
-              focus:outline-none focus:border-blue-500 transition-colors cursor-pointer"
+              focus:outline-none focus:border-blue-500 transition-colors"
           />
         </div>
 

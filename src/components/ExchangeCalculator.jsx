@@ -42,6 +42,19 @@ const ExchangeCalculator = ({
     }, () => {});
   };
 
+  const handleUsdChange = (e) => {
+    const numValue = Number(e.target.value) || 0;
+    onUsdChange(numValue);
+
+    // Auto-calculate UZS from USD
+    if (exchangeRate && numValue) {
+      const calculatedUzs = Math.round(numValue * exchangeRate);
+      onUzsChange(calculatedUzs);
+    } else if (!numValue) {
+      onUzsChange(0);
+    }
+  };
+
   const handleUzsInput = () => {
     showKeyboard('number', uzsValue?.toString() || '', (value) => {
       const numValue = value === '' ? 0 : parseInt(value, 10);
@@ -55,6 +68,19 @@ const ExchangeCalculator = ({
         onUsdChange(0);
       }
     }, () => {});
+  };
+
+  const handleUzsChange = (e) => {
+    const numValue = Number(e.target.value) || 0;
+    onUzsChange(numValue);
+
+    // Auto-calculate USD from UZS
+    if (exchangeRate && numValue) {
+      const calculatedUsd = Math.round(numValue / exchangeRate);
+      onUsdChange(calculatedUsd);
+    } else if (!numValue) {
+      onUsdChange(0);
+    }
   };
 
   return (
@@ -88,17 +114,14 @@ const ExchangeCalculator = ({
           </label>
           <div className="relative">
             <input
-              type="text"
+              type="number"
               value={usdValue || ''}
-              readOnly
-              onFocus={(e) => {
-                e.target.blur();
-                handleUsdInput();
-              }}
+              onChange={handleUsdChange}
+              onFocus={handleUsdInput}
               onClick={handleUsdInput}
               className="w-full h-14 px-4 pr-12 rounded-lg border-2 border-gray-200
-                text-lg font-semibold cursor-pointer
-                active:border-blue-500 transition-all"
+                text-lg font-semibold
+                focus:border-blue-500 transition-all"
               placeholder="0"
             />
             <div className="absolute right-4 top-1/2 transform -translate-y-1/2
@@ -115,17 +138,14 @@ const ExchangeCalculator = ({
           </label>
           <div className="relative">
             <input
-              type="text"
-              value={uzsValue ? new Intl.NumberFormat('uz-UZ').format(uzsValue) : ''}
-              readOnly
-              onFocus={(e) => {
-                e.target.blur();
-                handleUzsInput();
-              }}
+              type="number"
+              value={uzsValue || ''}
+              onChange={handleUzsChange}
+              onFocus={handleUzsInput}
               onClick={handleUzsInput}
               className="w-full h-14 px-4 pr-16 rounded-lg border-2 border-gray-200
-                text-lg font-semibold cursor-pointer
-                active:border-blue-500 transition-all"
+                text-lg font-semibold
+                focus:border-blue-500 transition-all"
               placeholder="0"
             />
             <div className="absolute right-4 top-1/2 transform -translate-y-1/2

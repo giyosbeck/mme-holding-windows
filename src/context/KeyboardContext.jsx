@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useCallback } from 'react';
+import React, { createContext, useState, useContext, useCallback, useEffect } from 'react';
 
 const KeyboardContext = createContext(null);
 
@@ -11,7 +11,44 @@ export const KeyboardProvider = ({ children }) => {
     onClose: null,
   });
 
+  // Track physical keyboard detection (localStorage)
+  const [physicalKeyboardDetected, setPhysicalKeyboardDetected] = useState(() => {
+    return localStorage.getItem('physical_keyboard_detected') === 'true';
+  });
+
+  // Listen for physical keyboard usage
+  useEffect(() => {
+    const handlePhysicalKeyboard = (e) => {
+      // Detect actual typing (not just navigation keys)
+      const isTypingKey =
+        e.key.length === 1 || // Any printable character
+        e.key === 'Backspace' ||
+        e.key === 'Enter' ||
+        e.key === 'Delete';
+
+      if (isTypingKey && !physicalKeyboardDetected) {
+        console.log('⌨️ Physical keyboard detected!');
+        localStorage.setItem('physical_keyboard_detected', 'true');
+        setPhysicalKeyboardDetected(true);
+
+        // Hide virtual keyboard if it's currently visible
+        if (keyboardState.isVisible) {
+          hideKeyboard();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handlePhysicalKeyboard);
+    return () => window.removeEventListener('keydown', handlePhysicalKeyboard);
+  }, [physicalKeyboardDetected, keyboardState.isVisible]);
+
   const showKeyboard = useCallback((type, initialValue, onChange, onClose) => {
+    // Don't show virtual keyboard if physical keyboard was detected
+    if (physicalKeyboardDetected) {
+      console.log('⌨️ Virtual keyboard disabled (physical keyboard detected)');
+      return;
+    }
+
     setKeyboardState({
       isVisible: true,
       type,
@@ -19,7 +56,7 @@ export const KeyboardProvider = ({ children }) => {
       onChange,
       onClose,
     });
-  }, []);
+  }, [physicalKeyboardDetected]);
 
   const hideKeyboard = useCallback(() => {
     if (keyboardState.onClose) {
@@ -44,11 +81,20 @@ export const KeyboardProvider = ({ children }) => {
     }
   }, [keyboardState]);
 
+  // Function to re-enable virtual keyboard (reset detection)
+  const enableVirtualKeyboard = useCallback(() => {
+    console.log('⌨️ Virtual keyboard re-enabled');
+    localStorage.removeItem('physical_keyboard_detected');
+    setPhysicalKeyboardDetected(false);
+  }, []);
+
   const value = {
     ...keyboardState,
     showKeyboard,
     hideKeyboard,
     updateValue,
+    physicalKeyboardDetected,
+    enableVirtualKeyboard,
   };
 
   return (

@@ -286,14 +286,11 @@ const FiftyFiftyNoSalon = () => {
                 </label>
                 <textarea
                   value={description}
-                  readOnly
-                  onFocus={(e) => {
-                    e.target.blur();
-                    showKeyboard('text', description, setDescription, () => {});
-                  }}
+                  onChange={(e) => setDescription(e.target.value)}
+                  onFocus={() => showKeyboard('text', description, setDescription, () => {})}
                   onClick={() => showKeyboard('text', description, setDescription, () => {})}
                   className="w-full h-32 px-4 py-3 rounded-lg border-2 border-gray-200 text-lg
-                    cursor-pointer active:border-blue-500 transition-all resize-none"
+                    focus:border-blue-500 transition-all resize-none"
                   placeholder={t.enterDescription || 'Tavsif kiriting'}
                 />
               </div>

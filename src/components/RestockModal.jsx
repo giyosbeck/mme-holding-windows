@@ -60,18 +60,18 @@ const RestockModal = ({ product, onClose, onSave }) => {
         <div className="mb-8">
           <label className="block text-gray-700 mb-2 text-xl">{t.price}</label>
           <input
-            type="text"
+            type="number"
+            step="0.01"
             value={price}
-            readOnly
-            onFocus={(e) => {
-              e.target.blur();
+            onChange={(e) => setPrice(Number(e.target.value) || 0)}
+            onFocus={() => {
               showKeyboard('decimal', price.toString(), setPrice, () => {});
             }}
             onClick={() => {
               showKeyboard('decimal', price.toString(), setPrice, () => {});
             }}
             className="w-full border-2 border-gray-300 rounded-lg p-4 text-xl
-              focus:border-gray-900 focus:outline-none cursor-pointer"
+              focus:border-gray-900 focus:outline-none"
             placeholder="0.00"
           />
         </div>
@@ -80,18 +80,17 @@ const RestockModal = ({ product, onClose, onSave }) => {
         <div className="mb-8">
           <label className="block text-gray-700 mb-2 text-xl">{t.amount}</label>
           <input
-            type="text"
+            type="number"
             value={amount}
-            readOnly
-            onFocus={(e) => {
-              e.target.blur();
+            onChange={(e) => setAmount(Number(e.target.value) || 0)}
+            onFocus={() => {
               showKeyboard('number', amount.toString(), setAmount, () => {});
             }}
             onClick={() => {
               showKeyboard('number', amount.toString(), setAmount, () => {});
             }}
             className="w-full border-2 border-gray-300 rounded-lg p-4 text-xl
-              focus:border-gray-900 focus:outline-none cursor-pointer"
+              focus:border-gray-900 focus:outline-none"
             placeholder={product.unit_of_measure || 'units'}
           />
         </div>

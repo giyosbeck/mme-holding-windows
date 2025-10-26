@@ -127,14 +127,11 @@ const AccessorySale = () => {
           <input
             type="text"
             value={accessoryName}
-            readOnly
-            onFocus={(e) => {
-              e.target.blur();
-              showKeyboard('text', accessoryName, setAccessoryName, () => {});
-            }}
+            onChange={(e) => setAccessoryName(e.target.value)}
+            onFocus={() => showKeyboard('text', accessoryName, setAccessoryName, () => {})}
             onClick={() => showKeyboard('text', accessoryName, setAccessoryName, () => {})}
             className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-              cursor-pointer active:border-blue-500 transition-all"
+              focus:border-blue-500 transition-all"
             placeholder={t.enterAccessoryName || 'Aksessuar nomini kiriting'}
           />
         </div>
@@ -154,22 +151,19 @@ const AccessorySale = () => {
               <label className="block text-gray-700 font-medium mb-2">USD</label>
               <div className="relative">
                 <input
-                  type="text"
+                  type="number"
                   value={priceUsd || ''}
-                  readOnly
-                  onFocus={(e) => {
-                    e.target.blur();
-                    showKeyboard('number', priceUsd?.toString() || '', (value) => {
-                      const numValue = value === '' ? 0 : parseInt(value, 10);
-                      setPriceUsd(numValue);
-                    }, () => {});
-                  }}
+                  onChange={(e) => setPriceUsd(Number(e.target.value) || 0)}
+                  onFocus={() => showKeyboard('number', priceUsd?.toString() || '', (value) => {
+                    const numValue = value === '' ? 0 : parseInt(value, 10);
+                    setPriceUsd(numValue);
+                  }, () => {})}
                   onClick={() => showKeyboard('number', priceUsd?.toString() || '', (value) => {
                     const numValue = value === '' ? 0 : parseInt(value, 10);
                     setPriceUsd(numValue);
                   }, () => {})}
                   className="w-full h-14 px-4 pr-12 rounded-lg border-2 border-gray-200
-                    text-lg font-semibold cursor-pointer active:border-blue-500 transition-all"
+                    text-lg font-semibold focus:border-blue-500 transition-all"
                   placeholder="0"
                 />
                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium">
@@ -183,22 +177,19 @@ const AccessorySale = () => {
               <label className="block text-gray-700 font-medium mb-2">UZS</label>
               <div className="relative">
                 <input
-                  type="text"
-                  value={priceUzs ? new Intl.NumberFormat('uz-UZ').format(priceUzs) : ''}
-                  readOnly
-                  onFocus={(e) => {
-                    e.target.blur();
-                    showKeyboard('number', priceUzs?.toString() || '', (value) => {
-                      const numValue = value === '' ? 0 : parseInt(value, 10);
-                      setPriceUzs(numValue);
-                    }, () => {});
-                  }}
+                  type="number"
+                  value={priceUzs || ''}
+                  onChange={(e) => setPriceUzs(Number(e.target.value) || 0)}
+                  onFocus={() => showKeyboard('number', priceUzs?.toString() || '', (value) => {
+                    const numValue = value === '' ? 0 : parseInt(value, 10);
+                    setPriceUzs(numValue);
+                  }, () => {})}
                   onClick={() => showKeyboard('number', priceUzs?.toString() || '', (value) => {
                     const numValue = value === '' ? 0 : parseInt(value, 10);
                     setPriceUzs(numValue);
                   }, () => {})}
                   className="w-full h-14 px-4 pr-16 rounded-lg border-2 border-gray-200
-                    text-lg font-semibold cursor-pointer active:border-blue-500 transition-all"
+                    text-lg font-semibold focus:border-blue-500 transition-all"
                   placeholder="0"
                 />
                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium text-sm">

@@ -4,6 +4,7 @@ import useAuthStore from './store/authStore';
 import ProtectedRoute from './components/ProtectedRoute';
 import { KeyboardProvider } from './context/KeyboardContext';
 import KeyboardManager from './components/KeyboardManager';
+import KeyboardToggleButton from './components/KeyboardToggleButton';
 import OfflineModal from './components/OfflineModal';
 import UpdateNotification from './components/UpdateNotification';
 
@@ -331,6 +332,7 @@ function App() {
           </Routes>
         </Suspense>
         <KeyboardManager />
+        <KeyboardToggleButton />
         <OfflineModal />
         <UpdateNotification />
       </HashRouter>

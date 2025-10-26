@@ -394,16 +394,13 @@ const FiftyFiftySale = () => {
                     <div>
                       <label className="block text-sm text-gray-600 mb-1">Narxi (USD) *</label>
                       <input
-                        type="text"
+                        type="number"
                         value={dressPrice}
-                        readOnly
-                        onFocus={(e) => {
-                          e.target.blur();
-                          showKeyboard('number', String(dressPrice), (val) => setDressPrice(Number(val)), () => {});
-                        }}
+                        onChange={(e) => setDressPrice(Number(e.target.value) || 0)}
+                        onFocus={() => showKeyboard('number', String(dressPrice), (val) => setDressPrice(Number(val)), () => {})}
                         onClick={() => showKeyboard('number', String(dressPrice), (val) => setDressPrice(Number(val)), () => {})}
                         className="w-full h-12 px-3 rounded-lg border-2 border-gray-200
-                          cursor-pointer active:border-blue-500 transition-all"
+                          focus:border-blue-500 transition-all"
                         placeholder="0"
                       />
                     </div>
@@ -429,14 +426,11 @@ const FiftyFiftySale = () => {
               <input
                 type="text"
                 value={brideName}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('text', brideName, setBrideName, () => {});
-                }}
+                onChange={(e) => setBrideName(e.target.value)}
+                onFocus={() => showKeyboard('text', brideName, setBrideName, () => {})}
                 onClick={() => showKeyboard('text', brideName, setBrideName, () => {})}
                 className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-                  cursor-pointer active:border-blue-500 transition-all"
+                  focus:border-blue-500 transition-all"
                 placeholder="Kelin ismi"
               />
             </div>
@@ -447,16 +441,13 @@ const FiftyFiftySale = () => {
                 Kelin beradigan pul (USD) *
               </label>
               <input
-                type="text"
+                type="number"
                 value={brideMustPay}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('number', String(brideMustPay), (val) => setBrideMustPay(Number(val)), () => {});
-                }}
+                onChange={(e) => setBrideMustPay(Number(e.target.value) || 0)}
+                onFocus={() => showKeyboard('number', String(brideMustPay), (val) => setBrideMustPay(Number(val)), () => {})}
                 onClick={() => showKeyboard('number', String(brideMustPay), (val) => setBrideMustPay(Number(val)), () => {})}
                 className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-                  cursor-pointer active:border-blue-500 transition-all"
+                  focus:border-blue-500 transition-all"
                 placeholder="0"
               />
             </div>
@@ -472,11 +463,10 @@ const FiftyFiftySale = () => {
                   <label className="block text-sm text-gray-600 mb-1">USD</label>
                   <div className="relative">
                     <input
-                      type="text"
+                      type="number"
                       value={brideGivenMoneyUsd || ''}
-                      readOnly
-                      onFocus={(e) => {
-                        e.target.blur();
+                      onChange={(e) => setBrideGivenMoneyUsd(Number(e.target.value) || 0)}
+                      onFocus={() => {
                         showKeyboard('number', brideGivenMoneyUsd?.toString() || '', (value) => {
                           const numValue = value === '' ? 0 : parseInt(value, 10);
                           setBrideGivenMoneyUsd(numValue);
@@ -489,7 +479,7 @@ const FiftyFiftySale = () => {
                         }, () => {});
                       }}
                       className="w-full h-14 px-4 pr-12 rounded-lg border-2 border-gray-200
-                        text-lg font-semibold cursor-pointer active:border-blue-500 transition-all"
+                        text-lg font-semibold focus:border-blue-500 transition-all"
                       placeholder="0"
                     />
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium">
@@ -503,11 +493,10 @@ const FiftyFiftySale = () => {
                   <label className="block text-sm text-gray-600 mb-1">UZS</label>
                   <div className="relative">
                     <input
-                      type="text"
-                      value={brideGivenMoneyUzs ? new Intl.NumberFormat('uz-UZ').format(brideGivenMoneyUzs) : ''}
-                      readOnly
-                      onFocus={(e) => {
-                        e.target.blur();
+                      type="number"
+                      value={brideGivenMoneyUzs || ''}
+                      onChange={(e) => setBrideGivenMoneyUzs(Number(e.target.value) || 0)}
+                      onFocus={() => {
                         showKeyboard('number', brideGivenMoneyUzs?.toString() || '', (value) => {
                           const numValue = value === '' ? 0 : parseInt(value, 10);
                           setBrideGivenMoneyUzs(numValue);
@@ -520,7 +509,7 @@ const FiftyFiftySale = () => {
                         }, () => {});
                       }}
                       className="w-full h-14 px-4 pr-16 rounded-lg border-2 border-gray-200
-                        text-lg font-semibold cursor-pointer active:border-blue-500 transition-all"
+                        text-lg font-semibold focus:border-blue-500 transition-all"
                       placeholder="0"
                     />
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium text-sm">
@@ -545,16 +534,13 @@ const FiftyFiftySale = () => {
               Salon beradigan pul (USD)
             </label>
             <input
-              type="text"
+              type="number"
               value={salonMustPay}
-              readOnly
-              onFocus={(e) => {
-                e.target.blur();
-                showKeyboard('number', String(salonMustPay), (val) => setSalonMustPay(Number(val)), () => {});
-              }}
+              onChange={(e) => setSalonMustPay(Number(e.target.value) || 0)}
+              onFocus={() => showKeyboard('number', String(salonMustPay), (val) => setSalonMustPay(Number(val)), () => {})}
               onClick={() => showKeyboard('number', String(salonMustPay), (val) => setSalonMustPay(Number(val)), () => {})}
               className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-                cursor-pointer active:border-blue-500 transition-all"
+                focus:border-blue-500 transition-all"
               placeholder="0"
             />
             <p className="text-sm text-gray-600 mt-2">
@@ -608,11 +594,10 @@ const FiftyFiftySale = () => {
                     <label className="block text-sm text-gray-600 mb-1">USD</label>
                     <div className="relative">
                       <input
-                        type="text"
+                        type="number"
                         value={salonGivenMoneyUsd || ''}
-                        readOnly
-                        onFocus={(e) => {
-                          e.target.blur();
+                        onChange={(e) => setSalonGivenMoneyUsd(Number(e.target.value) || 0)}
+                        onFocus={() => {
                           showKeyboard('number', salonGivenMoneyUsd?.toString() || '', (value) => {
                             const numValue = value === '' ? 0 : parseInt(value, 10);
                             setSalonGivenMoneyUsd(numValue);
@@ -625,7 +610,7 @@ const FiftyFiftySale = () => {
                           }, () => {});
                         }}
                         className="w-full h-14 px-4 pr-12 rounded-lg border-2 border-gray-200
-                          text-lg font-semibold cursor-pointer active:border-blue-500 transition-all"
+                          text-lg font-semibold focus:border-blue-500 transition-all"
                         placeholder="0"
                       />
                       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium">
@@ -639,11 +624,10 @@ const FiftyFiftySale = () => {
                     <label className="block text-sm text-gray-600 mb-1">UZS</label>
                     <div className="relative">
                       <input
-                        type="text"
-                        value={salonGivenMoneyUzs ? new Intl.NumberFormat('uz-UZ').format(salonGivenMoneyUzs) : ''}
-                        readOnly
-                        onFocus={(e) => {
-                          e.target.blur();
+                        type="number"
+                        value={salonGivenMoneyUzs || ''}
+                        onChange={(e) => setSalonGivenMoneyUzs(Number(e.target.value) || 0)}
+                        onFocus={() => {
                           showKeyboard('number', salonGivenMoneyUzs?.toString() || '', (value) => {
                             const numValue = value === '' ? 0 : parseInt(value, 10);
                             setSalonGivenMoneyUzs(numValue);
@@ -656,7 +640,7 @@ const FiftyFiftySale = () => {
                           }, () => {});
                         }}
                         className="w-full h-14 px-4 pr-16 rounded-lg border-2 border-gray-200
-                          text-lg font-semibold cursor-pointer active:border-blue-500 transition-all"
+                          text-lg font-semibold focus:border-blue-500 transition-all"
                         placeholder="0"
                       />
                       <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium text-sm">
@@ -812,14 +796,11 @@ const FiftyFiftySale = () => {
           </label>
           <textarea
             value={description}
-            readOnly
-            onFocus={(e) => {
-              e.target.blur();
-              showKeyboard('text', description, setDescription, () => {});
-            }}
+            onChange={(e) => setDescription(e.target.value)}
+            onFocus={() => showKeyboard('text', description, setDescription, () => {})}
             onClick={() => showKeyboard('text', description, setDescription, () => {})}
             className="w-full h-32 px-4 py-3 rounded-lg border-2 border-gray-200 text-lg
-              cursor-pointer active:border-blue-500 transition-all resize-none"
+              focus:border-blue-500 transition-all resize-none"
             placeholder="Izoh yozing..."
           />
         </div>

@@ -172,17 +172,14 @@ const GivenProductsHistory = () => {
               <input
                 type="text"
                 value={searchQuery}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('text', searchQuery, setSearchQuery, () => {});
-                }}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => showKeyboard('text', searchQuery, setSearchQuery, () => {})}
                 onClick={() => {
                   showKeyboard('text', searchQuery, setSearchQuery, () => {});
                 }}
                 placeholder={t.searchProducts}
                 className="w-full border-2 border-gray-300 rounded-lg p-4 text-xl
-                  focus:border-gray-900 focus:outline-none cursor-pointer"
+                  focus:border-gray-900 focus:outline-none"
               />
             </div>
           </div>
@@ -195,17 +192,14 @@ const GivenProductsHistory = () => {
               <input
                 type="text"
                 value={productSearchQuery}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('text', productSearchQuery, setProductSearchQuery, () => {});
-                }}
+                onChange={(e) => setProductSearchQuery(e.target.value)}
+                onFocus={() => showKeyboard('text', productSearchQuery, setProductSearchQuery, () => {})}
                 onClick={() => {
                   showKeyboard('text', productSearchQuery, setProductSearchQuery, () => {});
                 }}
                 placeholder={t.searchProducts}
                 className="w-full border-2 border-gray-300 rounded-lg p-4 text-xl
-                  focus:border-gray-900 focus:outline-none cursor-pointer"
+                  focus:border-gray-900 focus:outline-none"
               />
             </div>
           </div>

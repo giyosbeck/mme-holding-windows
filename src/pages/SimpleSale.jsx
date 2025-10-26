@@ -346,18 +346,17 @@ const SimpleSale = () => {
                             {t.price || 'Narxi'} (USD) *
                           </label>
                           <input
-                            type="text"
+                            type="number"
                             value={dressDetails[dress.id]?.price || ''}
-                            readOnly
-                            onFocus={(e) => {
-                              e.target.blur();
+                            onChange={(e) => updateDressDetail(dress.id, 'price', Number(e.target.value) || 0)}
+                            onFocus={() =>
                               showKeyboard(
                                 'number',
                                 String(dressDetails[dress.id]?.price || ''),
                                 (value) => updateDressDetail(dress.id, 'price', Number(value)),
                                 () => {}
-                              );
-                            }}
+                              )
+                            }
                             onClick={() =>
                               showKeyboard(
                                 'number',
@@ -367,7 +366,7 @@ const SimpleSale = () => {
                               )
                             }
                             className="w-full h-12 px-3 rounded-lg border-2 border-gray-200
-                              cursor-pointer active:border-blue-500 transition-all"
+                              focus:border-blue-500 transition-all"
                             placeholder="0"
                           />
                         </div>
@@ -464,11 +463,10 @@ const SimpleSale = () => {
               </label>
               <div className="relative">
                 <input
-                  type="text"
+                  type="number"
                   value={paymentUsd || ''}
-                  readOnly
-                  onFocus={(e) => {
-                    e.target.blur();
+                  onChange={(e) => setPaymentUsd(Number(e.target.value) || 0)}
+                  onFocus={() => {
                     showKeyboard('number', paymentUsd?.toString() || '', (value) => {
                       const numValue = value === '' ? 0 : parseInt(value, 10);
                       setPaymentUsd(numValue);
@@ -481,8 +479,8 @@ const SimpleSale = () => {
                     }, () => {});
                   }}
                   className="w-full h-14 px-4 pr-12 rounded-lg border-2 border-gray-200
-                    text-lg font-semibold cursor-pointer
-                    active:border-blue-500 transition-all"
+                    text-lg font-semibold
+                    focus:border-blue-500 transition-all"
                   placeholder="0"
                 />
                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2
@@ -499,11 +497,10 @@ const SimpleSale = () => {
               </label>
               <div className="relative">
                 <input
-                  type="text"
-                  value={paymentUzs ? new Intl.NumberFormat('uz-UZ').format(paymentUzs) : ''}
-                  readOnly
-                  onFocus={(e) => {
-                    e.target.blur();
+                  type="number"
+                  value={paymentUzs || ''}
+                  onChange={(e) => setPaymentUzs(Number(e.target.value) || 0)}
+                  onFocus={() => {
                     showKeyboard('number', paymentUzs?.toString() || '', (value) => {
                       const numValue = value === '' ? 0 : parseInt(value, 10);
                       setPaymentUzs(numValue);
@@ -516,8 +513,8 @@ const SimpleSale = () => {
                     }, () => {});
                   }}
                   className="w-full h-14 px-4 pr-16 rounded-lg border-2 border-gray-200
-                    text-lg font-semibold cursor-pointer
-                    active:border-blue-500 transition-all"
+                    text-lg font-semibold
+                    focus:border-blue-500 transition-all"
                   placeholder="0"
                 />
                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2

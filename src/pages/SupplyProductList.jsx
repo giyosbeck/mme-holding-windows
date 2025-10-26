@@ -147,17 +147,14 @@ const SupplyProductList = () => {
             <input
               type="text"
               value={searchQuery}
-              readOnly
-              onFocus={(e) => {
-                e.target.blur();
-                showKeyboard('text', searchQuery, setSearchQuery, () => {});
-              }}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => showKeyboard('text', searchQuery, setSearchQuery, () => {})}
               onClick={() => {
                 showKeyboard('text', searchQuery, setSearchQuery, () => {});
               }}
               placeholder={t.searchProducts}
               className="w-full h-16 border-2 border-gray-300 rounded-xl px-6 text-xl
-                focus:border-blue-500 focus:outline-none transition-colors cursor-pointer"
+                focus:border-blue-500 focus:outline-none transition-colors"
             />
           </div>
         </div>

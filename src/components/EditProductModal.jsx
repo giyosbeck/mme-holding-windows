@@ -120,16 +120,15 @@ const EditProductModal = ({ product, onClose, onSave, onDelete }) => {
           <input
             type="text"
             value={formData.product_name}
-            readOnly
-            onFocus={(e) => {
-              e.target.blur();
+            onChange={(e) => setFormData({ ...formData, product_name: e.target.value })}
+            onFocus={() => {
               showKeyboard('text', formData.product_name, (val) => setFormData({ ...formData, product_name: val }), () => {});
             }}
             onClick={() => {
               showKeyboard('text', formData.product_name, (val) => setFormData({ ...formData, product_name: val }), () => {});
             }}
             className="w-full border-2 border-gray-300 rounded-lg p-4 text-xl
-              focus:border-gray-900 focus:outline-none cursor-pointer"
+              focus:border-gray-900 focus:outline-none"
           />
         </div>
 
@@ -157,16 +156,15 @@ const EditProductModal = ({ product, onClose, onSave, onDelete }) => {
           <input
             type="text"
             value={formData.product_code}
-            readOnly
-            onFocus={(e) => {
-              e.target.blur();
+            onChange={(e) => setFormData({ ...formData, product_code: e.target.value })}
+            onFocus={() => {
               showKeyboard('text', formData.product_code, (val) => setFormData({ ...formData, product_code: val }), () => {});
             }}
             onClick={() => {
               showKeyboard('text', formData.product_code, (val) => setFormData({ ...formData, product_code: val }), () => {});
             }}
             className="w-full border-2 border-gray-300 rounded-lg p-4 text-xl
-              focus:border-gray-900 focus:outline-none cursor-pointer"
+              focus:border-gray-900 focus:outline-none"
           />
         </div>
 
@@ -174,18 +172,17 @@ const EditProductModal = ({ product, onClose, onSave, onDelete }) => {
         <div className="mb-8">
           <label className="block text-gray-700 mb-2 text-xl">{t.warningLimit}</label>
           <input
-            type="text"
+            type="number"
             value={formData.product_count_warning_limit}
-            readOnly
-            onFocus={(e) => {
-              e.target.blur();
+            onChange={(e) => setFormData({ ...formData, product_count_warning_limit: Number(e.target.value) || 0 })}
+            onFocus={() => {
               showKeyboard('number', formData.product_count_warning_limit.toString(), (val) => setFormData({ ...formData, product_count_warning_limit: parseInt(val) || 0 }), () => {});
             }}
             onClick={() => {
               showKeyboard('number', formData.product_count_warning_limit.toString(), (val) => setFormData({ ...formData, product_count_warning_limit: parseInt(val) || 0 }), () => {});
             }}
             className="w-full border-2 border-gray-300 rounded-lg p-4 text-xl
-              focus:border-gray-900 focus:outline-none cursor-pointer"
+              focus:border-gray-900 focus:outline-none"
           />
         </div>
 

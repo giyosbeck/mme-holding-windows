@@ -105,9 +105,8 @@ const EditDressModal = ({ dress, onClose, onSuccess }) => {
                 <input
                   type="text"
                   value={formData.dress_name}
-                  readOnly
-                  onFocus={(e) => {
-                    e.target.blur();
+                  onChange={(e) => setFormData({ ...formData, dress_name: e.target.value })}
+                  onFocus={() => {
                     showKeyboard('text', formData.dress_name, (value) => {
                       setFormData({ ...formData, dress_name: value });
                     }, () => {});
@@ -118,7 +117,7 @@ const EditDressModal = ({ dress, onClose, onSuccess }) => {
                     }, () => {});
                   }}
                   className="w-full h-14 px-4 text-lg border-2 border-gray-200 rounded-xl
-                    focus:outline-none focus:border-blue-500 transition-colors cursor-pointer"
+                    focus:outline-none focus:border-blue-500 transition-colors"
                 />
               </div>
 
@@ -178,9 +177,8 @@ const EditDressModal = ({ dress, onClose, onSuccess }) => {
                 <input
                   type="text"
                   value={formData.description}
-                  readOnly
-                  onFocus={(e) => {
-                    e.target.blur();
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  onFocus={() => {
                     showKeyboard('text', formData.description, (value) => {
                       setFormData({ ...formData, description: value });
                     }, () => {});
@@ -191,7 +189,7 @@ const EditDressModal = ({ dress, onClose, onSuccess }) => {
                     }, () => {});
                   }}
                   className="w-full h-14 px-4 text-lg border-2 border-gray-200 rounded-xl
-                    focus:outline-none focus:border-blue-500 transition-colors cursor-pointer"
+                    focus:outline-none focus:border-blue-500 transition-colors"
                 />
               </div>
             </div>

@@ -301,14 +301,11 @@ const SalonOrderPlacement = () => {
               <input
                 type="text"
                 value={brideName}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('text', brideName, setBrideName, () => {});
-                }}
+                onChange={(e) => setBrideName(e.target.value)}
+                onFocus={() => showKeyboard('text', brideName, setBrideName, () => {})}
                 onClick={() => showKeyboard('text', brideName, setBrideName, () => {})}
                 className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-                  cursor-pointer active:border-blue-500 transition-all"
+                  focus:border-blue-500 transition-all"
                 placeholder={t.brideName || 'Kelin ismi'}
               />
             </div>
@@ -319,16 +316,13 @@ const SalonOrderPlacement = () => {
                 {t.phoneNumber || 'Telefon raqami'} *
               </label>
               <input
-                type="text"
+                type="number"
                 value={bridePhone}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('number', bridePhone, setBridePhone, () => {});
-                }}
+                onChange={(e) => setBridePhone(e.target.value)}
+                onFocus={() => showKeyboard('number', bridePhone, setBridePhone, () => {})}
                 onClick={() => showKeyboard('number', bridePhone, setBridePhone, () => {})}
                 className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-                  cursor-pointer active:border-blue-500 transition-all"
+                  focus:border-blue-500 transition-all"
                 placeholder="998901234567"
               />
             </div>
@@ -355,14 +349,11 @@ const SalonOrderPlacement = () => {
               <input
                 type="text"
                 value={shoulderMeasurement}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('text', shoulderMeasurement, setShoulderMeasurement, () => {});
-                }}
+                onChange={(e) => setShoulderMeasurement(e.target.value)}
+                onFocus={() => showKeyboard('text', shoulderMeasurement, setShoulderMeasurement, () => {})}
                 onClick={() => showKeyboard('text', shoulderMeasurement, setShoulderMeasurement, () => {})}
                 className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-                  cursor-pointer active:border-blue-500 transition-all"
+                  focus:border-blue-500 transition-all"
                 placeholder={t.shoulderMeasurement || "Shleft o'lchami"}
               />
             </div>
@@ -429,14 +420,11 @@ const SalonOrderPlacement = () => {
               <input
                 type="text"
                 value={desiredColor}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('text', desiredColor, setDesiredColor, () => {});
-                }}
+                onChange={(e) => setDesiredColor(e.target.value)}
+                onFocus={() => showKeyboard('text', desiredColor, setDesiredColor, () => {})}
                 onClick={() => showKeyboard('text', desiredColor, setDesiredColor, () => {})}
                 className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-                  cursor-pointer active:border-blue-500 transition-all"
+                  focus:border-blue-500 transition-all"
                 placeholder={t.color || 'Rang'}
               />
             </div>
@@ -449,14 +437,11 @@ const SalonOrderPlacement = () => {
               <input
                 type="text"
                 value={desiredSize}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('text', desiredSize, setDesiredSize, () => {});
-                }}
+                onChange={(e) => setDesiredSize(e.target.value)}
+                onFocus={() => showKeyboard('text', desiredSize, setDesiredSize, () => {})}
                 onClick={() => showKeyboard('text', desiredSize, setDesiredSize, () => {})}
                 className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-                  cursor-pointer active:border-blue-500 transition-all"
+                  focus:border-blue-500 transition-all"
                 placeholder={t.size || "O'lchami"}
               />
             </div>
@@ -482,14 +467,11 @@ const SalonOrderPlacement = () => {
               </label>
               <textarea
                 value={designNotes}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('text', designNotes, setDesignNotes, () => {});
-                }}
+                onChange={(e) => setDesignNotes(e.target.value)}
+                onFocus={() => showKeyboard('text', designNotes, setDesignNotes, () => {})}
                 onClick={() => showKeyboard('text', designNotes, setDesignNotes, () => {})}
                 className="w-full h-32 px-4 py-3 rounded-lg border-2 border-gray-200 text-lg
-                  cursor-pointer active:border-blue-500 transition-all resize-none"
+                  focus:border-blue-500 transition-all resize-none"
                 placeholder="Maxsus dizayn talablari..."
               />
             </div>
@@ -509,16 +491,13 @@ const SalonOrderPlacement = () => {
                 Umumiy buyurtma summasi (UZS) *
               </label>
               <input
-                type="text"
+                type="number"
                 value={totalOrderSum}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('number', String(totalOrderSum), (val) => setTotalOrderSum(Number(val)), () => {});
-                }}
+                onChange={(e) => setTotalOrderSum(Number(e.target.value) || 0)}
+                onFocus={() => showKeyboard('number', String(totalOrderSum), (val) => setTotalOrderSum(Number(val)), () => {})}
                 onClick={() => showKeyboard('number', String(totalOrderSum), (val) => setTotalOrderSum(Number(val)), () => {})}
                 className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-                  cursor-pointer active:border-blue-500 transition-all"
+                  focus:border-blue-500 transition-all"
                 placeholder="0"
               />
             </div>
@@ -529,16 +508,13 @@ const SalonOrderPlacement = () => {
                 Salon to'lashi kerak (UZS) *
               </label>
               <input
-                type="text"
+                type="number"
                 value={salonMustPay}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
-                  showKeyboard('number', String(salonMustPay), (val) => setSalonMustPay(Number(val)), () => {});
-                }}
+                onChange={(e) => setSalonMustPay(Number(e.target.value) || 0)}
+                onFocus={() => showKeyboard('number', String(salonMustPay), (val) => setSalonMustPay(Number(val)), () => {})}
                 onClick={() => showKeyboard('number', String(salonMustPay), (val) => setSalonMustPay(Number(val)), () => {})}
                 className="w-full h-14 px-4 rounded-lg border-2 border-gray-200 text-lg
-                  cursor-pointer active:border-blue-500 transition-all"
+                  focus:border-blue-500 transition-all"
                 placeholder="0"
               />
             </div>
@@ -554,11 +530,10 @@ const SalonOrderPlacement = () => {
                   <label className="block text-sm text-gray-600 mb-1">USD</label>
                   <div className="relative">
                     <input
-                      type="text"
+                      type="number"
                       value={salonPaidUsd || ''}
-                      readOnly
-                      onFocus={(e) => {
-                        e.target.blur();
+                      onChange={(e) => setSalonPaidUsd(Number(e.target.value) || 0)}
+                      onFocus={() => {
                         showKeyboard('number', salonPaidUsd?.toString() || '', (value) => {
                           const numValue = value === '' ? 0 : parseInt(value, 10);
                           setSalonPaidUsd(numValue);
@@ -571,7 +546,7 @@ const SalonOrderPlacement = () => {
                         }, () => {});
                       }}
                       className="w-full h-14 px-4 pr-12 rounded-lg border-2 border-gray-200
-                        text-lg font-semibold cursor-pointer active:border-blue-500 transition-all"
+                        text-lg font-semibold focus:border-blue-500 transition-all"
                       placeholder="0"
                     />
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium">
@@ -585,11 +560,10 @@ const SalonOrderPlacement = () => {
                   <label className="block text-sm text-gray-600 mb-1">UZS</label>
                   <div className="relative">
                     <input
-                      type="text"
-                      value={salonPaidUzs ? new Intl.NumberFormat('uz-UZ').format(salonPaidUzs) : ''}
-                      readOnly
-                      onFocus={(e) => {
-                        e.target.blur();
+                      type="number"
+                      value={salonPaidUzs || ''}
+                      onChange={(e) => setSalonPaidUzs(Number(e.target.value) || 0)}
+                      onFocus={() => {
                         showKeyboard('number', salonPaidUzs?.toString() || '', (value) => {
                           const numValue = value === '' ? 0 : parseInt(value, 10);
                           setSalonPaidUzs(numValue);
@@ -602,7 +576,7 @@ const SalonOrderPlacement = () => {
                         }, () => {});
                       }}
                       className="w-full h-14 px-4 pr-16 rounded-lg border-2 border-gray-200
-                        text-lg font-semibold cursor-pointer active:border-blue-500 transition-all"
+                        text-lg font-semibold focus:border-blue-500 transition-all"
                       placeholder="0"
                     />
                     <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium text-sm">

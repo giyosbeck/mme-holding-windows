@@ -82,17 +82,14 @@ const DressesList = () => {
           <input
             type="text"
             value={searchQuery}
-            readOnly
-            onFocus={(e) => {
-              e.target.blur();
-              showKeyboard('text', searchQuery, setSearchQuery, () => {});
-            }}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => showKeyboard('text', searchQuery, setSearchQuery, () => {})}
             onClick={() => {
               showKeyboard('text', searchQuery, setSearchQuery, () => {});
             }}
             placeholder={t.search}
             className="w-full h-16 px-6 text-lg border-2 border-gray-200 rounded-xl
-              focus:outline-none focus:border-blue-500 transition-colors cursor-pointer
+              focus:outline-none focus:border-blue-500 transition-colors
               bg-white shadow-sm"
           />
         </div>

@@ -151,15 +151,12 @@ const SalonDressList = () => {
         <input
           type="text"
           value={searchQuery}
-          readOnly
-          onFocus={(e) => {
-            e.target.blur();
-            showKeyboard('text', searchQuery, setSearchQuery, () => {});
-          }}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onFocus={() => showKeyboard('text', searchQuery, setSearchQuery, () => {})}
           onClick={() => showKeyboard('text', searchQuery, setSearchQuery, () => {})}
           placeholder={t.search || 'Qidirish'}
           className="w-full h-14 px-6 rounded-lg border-2 border-gray-200 text-lg
-            cursor-pointer active:border-blue-500 transition-all shadow-sm"
+            focus:border-blue-500 transition-all shadow-sm"
         />
 
         <div className="mt-4 text-lg text-gray-600">

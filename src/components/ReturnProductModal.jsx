@@ -110,11 +110,10 @@ const ReturnProductModal = ({ product, onClose, onSuccess }) => {
             <div className="mb-10">
               <label className="block text-gray-700 mb-2 text-xl">{t.returnAmount}</label>
               <input
-                type="text"
+                type="number"
                 value={returnAmount}
-                readOnly
-                onFocus={(e) => {
-                  e.target.blur();
+                onChange={(e) => setReturnAmount(Number(e.target.value) || 0)}
+                onFocus={() => {
                   showKeyboard('number', returnAmount.toString(), setReturnAmount, () => {});
                 }}
                 onClick={() => {
@@ -122,7 +121,7 @@ const ReturnProductModal = ({ product, onClose, onSuccess }) => {
                 }}
                 disabled={loading}
                 className="w-full border-2 border-gray-300 rounded-lg p-4 text-xl
-                  focus:border-gray-900 focus:outline-none disabled:bg-gray-100 cursor-pointer"
+                  focus:border-gray-900 focus:outline-none disabled:bg-gray-100"
               />
             </div>
 
