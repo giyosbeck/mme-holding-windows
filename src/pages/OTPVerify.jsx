@@ -55,8 +55,8 @@ const OTPVerify = () => {
         return;
       }
 
-      // Check if user has valid role (WAREHOUSE or FACTORY_MANAGER)
-      const validRoles = ['WAREHOUSE', 'FACTORY_MANAGER'];
+      // Check if user has valid role (WAREHOUSE, FACTORY_MANAGER, or SALON)
+      const validRoles = ['WAREHOUSE', 'FACTORY_MANAGER', 'SALON'];
       if (!validRoles.includes(response.userRole)) {
         setError('You do not have access to this system.');
         console.log('❌ Unauthorized role attempt:', response);
@@ -85,6 +85,8 @@ const OTPVerify = () => {
       // Navigate based on role
       if (response.userRole === 'FACTORY_MANAGER') {
         navigate('/factory-manager/home');
+      } else if (response.userRole === 'SALON') {
+        navigate('/salon/home');
       } else {
         navigate('/home');
       }

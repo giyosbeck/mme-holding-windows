@@ -176,5 +176,104 @@ export default {
   keyboard: {
     space: "Bo'sh joy",
     done: "Tayyor"
-  }
+  },
+
+  // Salon Role Pages
+  salon: "Salon",
+  sales: "Sotuv",
+  salonManager: "Salon menejeri",
+
+  // Salon Home
+  salesQuickActions: "Sotuv bo'limi",
+  salonDressList: "Koylaklar royxati",
+  salonDressListDesc: "Barcha koylaklar ro'yxati",
+  salonList: "Salonlar royxati",
+  salonListDesc: "Salonlarni boshqarish",
+  salonOrderPlacement: "Buyurtma qilish",
+  salonOrderPlacementDesc: "Yangi buyurtma yaratish",
+  salonSimpleSale: "Oddiy sotuv",
+  salonSimpleSaleDesc: "Oddiy savdo",
+  salonFiftyFiftySale: "50/50 sotuv",
+  salonFiftyFiftySaleDesc: "50/50 savdo",
+  salonAccessorySale: "Aksessuar sotish",
+  salonAccessorySaleDesc: "Aksesuarlar sotish",
+  salonFiftyFiftyNoSalon: "50/50 salon yo'qlar",
+  salonFiftyFiftyNoSalonDesc: "Salonga biriktirish",
+  salonShipments: "Jonatmalar royxati",
+  salonShipmentsDesc: "Jonatmalar ro'yxati",
+
+  // Dress List
+  totalDresses: "Jami koylaklar",
+  noDressesYet: "Hozircha koylaklar mavjud emas",
+  tryDifferentSearch: "Boshqa qidiruv amalga oshiring",
+  size: "O'lchami",
+
+  // Dress Details
+  dressInformation: "Ko'ylak ma'lumotlari",
+  createdDate: "Kiritilgan sana",
+  deleteConfirmDesc: "Bu amalni qaytarib bo'lmaydi",
+  deleting: "O'chirilmoqda...",
+  deleteImageConfirm: "Rasmni o'chirmoqchimisiz?",
+  about: "Ma'lumot",
+
+  // Salon List
+  totalSalons: "Jami salonlar",
+  noSalons: "Salonlar topilmadi",
+  noSalonsYet: "Hozircha salonlar mavjud emas",
+  salonOwner: "Salonchi",
+
+  // Salon Details
+  totalSales: "Umumiy savdo",
+  totalDebt: "Qarzdorlik",
+  totalProducts: "Mahsulotlar",
+  salonInformation: "Salon ma'lumotlari",
+  salonName: "Salon nomi",
+  phoneNumber: "Telefon raqami",
+  address: "Manzil",
+  orders: "Buyurtmalar",
+  dressCount: "Koylaklar soni",
+  paid: "To'landi",
+  debt: "Qarz",
+  totalSale: "Umumiy",
+  simpleSales: "Oddiy sotuv",
+  fiftyFiftySales: "50/50 sotuv",
+  accessories: "Aksesuarlar",
+  totalPaid: "To'langan pul",
+
+  // Exchange Calculator
+  exchangeRate: "Markaziy bank kursi",
+  usd: "USD",
+  uzs: "UZS",
+
+  // Accessory Sale
+  accessoryName: "Aksessuar nomi",
+  accessoryPrice: "Aksessuar narxi",
+  enterAccessoryName: "Aksessuar nomini kiriting",
+  accessoryNameRequired: "Aksessuar nomini kiriting",
+  priceRequired: "Narxini kiriting",
+  paymentRequired: "To'lov miqdorini kiriting",
+  paymentAmount: "To'langan pul",
+  optional: "Ixtiyoriy",
+  selectSalon: "Salon tanlang",
+  selectSalonFirst: "Avval salon tanlang",
+  selectDress: "Ko'ylak tanlang",
+  selected: "Tanlangan",
+  confirm: "Tasdiqlash",
+  saving: "Saqlanmoqda...",
+  enterDescription: "Tavsif kiriting",
+
+  // 50/50 Without Salon
+  brideName: "Kelin ismi",
+  totalPrice: "Umumiy narx",
+  total: "Jami",
+  attachSalon: "Salon biriktirish",
+  noSalesWithoutSalon: "50/50 sotuv topilmadi",
+  noSalesWithoutSalonDesc: "Barcha 50/50 sotuvlar salonga biriktirilgan",
+
+  // Common
+  comingSoon: "Tez orada",
+  statisticsComingSoon: "Statistika sahifasi hozirda ishlab chiqilmoqda",
+  reportsComingSoon: "Hisobot sahifasi hozirda ishlab chiqilmoqda",
+  orderPlacementComingSoon: "Buyurtma qilish sahifasi hozirda ishlab chiqilmoqda",
+  shipmentsComingSoon: "Jonatmalar royxati sahifasi hozirda ishlab chiqilmoqda"
 };

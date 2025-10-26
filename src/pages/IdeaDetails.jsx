@@ -224,7 +224,7 @@ const IdeaDetails = () => {
       {/* Reject Confirmation Modal */}
       {showRejectModal && (
         <div
-          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center"
           onClick={() => setShowRejectModal(false)}
         >
           <div
@@ -269,7 +269,7 @@ const IdeaDetails = () => {
       {/* Approve Confirmation Modal */}
       {showApproveModal && (
         <div
-          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center"
           onClick={() => setShowApproveModal(false)}
         >
           <div

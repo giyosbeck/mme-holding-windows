@@ -390,7 +390,7 @@ const ProductList = () => {
 
       {/* Confirmation Modal */}
       {confirmHideProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
           <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-8 shadow-xl">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">
               {t.hideConfirm}

@@ -176,5 +176,94 @@ export default {
   keyboard: {
     space: "Пробел",
     done: "Готово"
-  }
+  },
+
+  // Salon Role Pages
+  salon: "Салон",
+  sales: "Продажи",
+  salonManager: "Менеджер салона",
+
+  // Salon Home
+  salesQuickActions: "Раздел продаж",
+  salonDressList: "Список платьев",
+  salonDressListDesc: "Все платья",
+  salonList: "Список салонов",
+  salonListDesc: "Управление салонами",
+  salonOrderPlacement: "Оформить заказ",
+  salonOrderPlacementDesc: "Создать новый заказ",
+  salonSimpleSale: "Обычная продажа",
+  salonSimpleSaleDesc: "Обычная продажа",
+  salonFiftyFiftySale: "Продажа 50/50",
+  salonFiftyFiftySaleDesc: "Продажа 50/50",
+  salonAccessorySale: "Продажа аксессуаров",
+  salonAccessorySaleDesc: "Продажа аксессуаров",
+  salonFiftyFiftyNoSalon: "50/50 без салона",
+  salonFiftyFiftyNoSalonDesc: "Прикрепить к салону",
+  salonShipments: "Список отправлений",
+  salonShipmentsDesc: "Список отправлений",
+
+  // Dress List
+  totalDresses: "Всего платьев",
+  noDressesYet: "Платьев пока нет",
+  tryDifferentSearch: "Попробуйте другой поиск",
+  size: "Размер",
+
+  // Dress Details
+  dressInformation: "Информация о платье",
+  createdDate: "Дата создания",
+  deleteConfirmDesc: "Это действие нельзя отменить",
+  deleting: "Удаление...",
+  deleteImageConfirm: "Удалить изображение?",
+  about: "Информация",
+
+  // Salon List
+  totalSalons: "Всего салонов",
+  noSalons: "Салоны не найдены",
+  noSalonsYet: "Салонов пока нет",
+  salonOwner: "Владелец салона",
+
+  // Salon Details
+  totalSales: "Общие продажи",
+  totalDebt: "Задолженность",
+  totalProducts: "Товары",
+  salonInformation: "Информация о салоне",
+  phoneNumber: "Номер телефона",
+  address: "Адрес",
+  orders: "Заказы",
+  dressCount: "Количество платьев",
+  paid: "Оплачено",
+  debt: "Долг",
+  totalSale: "Всего",
+  simpleSales: "Обычные продажи",
+  fiftyFiftySales: "Продажи 50/50",
+  accessories: "Аксессуары",
+  totalPaid: "Оплачено",
+
+  // Exchange Calculator
+  exchangeRate: "Курс Центробанка",
+  usd: "USD",
+  uzs: "UZS",
+
+  // Accessory Sale
+  accessoryName: "Название аксессуара",
+  accessoryPrice: "Цена аксессуара",
+  enterAccessoryName: "Введите название аксессуара",
+  accessoryNameRequired: "Введите название аксессуара",
+  priceRequired: "Введите цену",
+  paymentRequired: "Введите сумму оплаты",
+  paymentAmount: "Оплачено",
+  optional: "Необязательно",
+  selectSalon: "Выберите салон",
+  selectDress: "Выберите платье",
+  selected: "Выбрано",
+  confirm: "Подтвердить",
+  saving: "Сохранение...",
+  enterDescription: "Введите описание",
+
+  // Common
+  comingSoon: "Скоро",
+  statisticsComingSoon: "Страница статистики в разработке",
+  reportsComingSoon: "Страница отчетов в разработке",
+  orderPlacementComingSoon: "Страница заказа в разработке",
+  shipmentsComingSoon: "Страница отправлений в разработке"
 };

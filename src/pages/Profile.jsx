@@ -18,6 +18,8 @@ const Profile = () => {
     // Navigate based on user role
     if (user?.role === 'FACTORY_MANAGER') {
       navigate('/factory-manager/home');
+    } else if (user?.role === 'SALON') {
+      navigate('/salon/home');
     } else {
       navigate('/home');
     }
@@ -27,6 +29,8 @@ const Profile = () => {
   const getRoleText = () => {
     if (user?.role === 'FACTORY_MANAGER') {
       return t.factoryManager;
+    } else if (user?.role === 'SALON') {
+      return t.salonManager;
     }
     return t.warehouseManager;
   };

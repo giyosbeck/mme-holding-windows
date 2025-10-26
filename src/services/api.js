@@ -112,7 +112,7 @@ export const formatPhoneForDisplay = (phone) => {
 
 // Helper to get full image URL
 export const getImageUrl = (imagePath) => {
-  if (!imagePath) return null;
+  if (!imagePath || typeof imagePath !== 'string') return null;
   if (imagePath.startsWith('http')) return imagePath;
   return `${getBaseUrl()}${imagePath}`;
 };

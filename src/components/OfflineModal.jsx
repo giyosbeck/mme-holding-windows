@@ -13,7 +13,7 @@ const OfflineModal = () => {
   // Show "back online" success message briefly
   if (isOnline && wasOffline) {
     return (
-      <div className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-8">
+      <div className="fixed inset-0 z-[100] bg-black/30 backdrop-blur-sm flex items-center justify-center p-8">
         <div className="bg-white rounded-2xl p-10 max-w-md w-full text-center shadow-2xl">
           <div className="text-8xl mb-6">✅</div>
           <h2 className="text-3xl font-semibold text-gray-900 mb-4">
@@ -30,7 +30,7 @@ const OfflineModal = () => {
   // Show offline warning when no connection
   if (!isOnline) {
     return (
-      <div className="fixed inset-0 z-[100] bg-black/50 flex items-center justify-center p-8">
+      <div className="fixed inset-0 z-[100] bg-black/30 backdrop-blur-sm flex items-center justify-center p-8">
         <div className="bg-white rounded-2xl p-10 max-w-md w-full text-center shadow-2xl">
           <div className="text-8xl mb-6">📡</div>
           <h2 className="text-3xl font-semibold text-gray-900 mb-4">

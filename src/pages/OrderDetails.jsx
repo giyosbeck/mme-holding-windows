@@ -383,7 +383,7 @@ const OrderDetails = () => {
       {/* Confirmation Modal */}
       {showConfirmModal && (
         <div
-          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-8"
+          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center p-8"
           onClick={handleCancelComplete}
         >
           <div
@@ -491,7 +491,7 @@ const OrderDetails = () => {
       {/* Success Modal */}
       {showSuccess && (
         <div
-          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-8"
+          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center p-8"
           onClick={handleSuccessClose}
         >
           <div
@@ -519,7 +519,7 @@ const OrderDetails = () => {
       {/* Error Modal */}
       {showError && (
         <div
-          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-8"
+          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center p-8"
           onClick={() => setShowError(false)}
         >
           <div

@@ -45,7 +45,7 @@ const RestockModal = ({ product, onClose, onSave }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/10 backdrop-blur-sm flex items-center justify-center z-50 p-8"
+      className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-8"
       onClick={onClose}
     >
       <div

@@ -80,7 +80,7 @@ const EditProductModal = ({ product, onClose, onSave, onDelete }) => {
   return (
     <>
       <div
-        className="fixed inset-0 bg-black/10 backdrop-blur-sm flex items-center justify-center z-50 p-8"
+        className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-8"
         onClick={onClose}
       >
         <div
@@ -238,7 +238,7 @@ const EditProductModal = ({ product, onClose, onSave, onDelete }) => {
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
         <div
-          className="fixed inset-0 z-[60] bg-black/50 flex items-center justify-center p-8"
+          className="fixed inset-0 z-[60] bg-black/30 backdrop-blur-sm flex items-center justify-center p-8"
           onClick={() => setShowDeleteConfirm(false)}
         >
           <div

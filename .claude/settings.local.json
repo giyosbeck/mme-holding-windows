@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/zubayr/Documents/mme-holding/MME Holding/UIKit/Moduls/Roles/Seller/Sale/SaleAccessory/ViewModel/**)",
+      "Read(//Users/zubayr/Documents/mme-holding/MME Holding/UIKit/Models/SlSaleDM/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
