@@ -120,6 +120,7 @@ const SalonDetails = () => {
             <img
               src={getImageUrl(salonData.salon_image)}
               alt={salonData.salon_name}
+              loading="lazy"
               className="w-full h-80 object-cover"
             />
           </div>

@@ -274,6 +274,7 @@ const SimpleSale = () => {
                         <img
                           src={getImageUrl(dress.dress_image[0])}
                           alt={dress.dress_name}
+                          loading="lazy"
                           className="w-full h-full object-cover"
                         />
                       ) : (

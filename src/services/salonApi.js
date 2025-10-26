@@ -442,18 +442,38 @@ export const getFiftyFiftyWithoutSalon = async (limit = 20, offset = 0) => {
 };
 
 /**
+ * Get 50/50 sale without salon details by ID
+ * @param {string} id - Sale ID
+ * @returns {Promise} Sale details object
+ */
+export const getFiftyFiftyNoSalonDetails = async (id) => {
+  try {
+    const response = await api.get(`/sale5050/not-salon/${id}`);
+    console.log('📋 50/50 Sale Without Salon Details:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('❌ Failed to fetch 50/50 sale without salon details:', error);
+    throw error;
+  }
+};
+
+/**
  * Connect salon to 50/50 sale
- * @param {string} id - 50/50 sale ID
- * @param {string} customer_salon_id - Salon ID to connect
+ * @param {Object} data - Connection data
+ * @param {string} data.sale50_id - 50/50 sale ID
+ * @param {string} data.customer_salon_id - Salon ID to connect
+ * @param {number} data.salon_must_pay - Amount salon must pay
+ * @param {number} data.central_bank_usd_course - USD exchange rate
+ * @param {number} data.money_salon_usd - Amount paid in USD
+ * @param {number} data.money_salon_uzs - Amount paid in UZS
+ * @param {string} data.date_gives_debt - Debt payment date (optional)
+ * @param {string} data.description - Description
  * @returns {Promise} Response object
  */
-export const connectSalonToFiftyFifty = async (id, customer_salon_id) => {
+export const connectSalonToFiftyFifty = async (data) => {
   try {
-    const response = await api.put('/sale5050/connect-salon', {
-      id,
-      customer_salon_id
-    });
-    console.log('✅ Salon Connected to 50/50 Sale');
+    const response = await api.put('/sale5050/connect-salon', data);
+    console.log('✅ Salon Connected to 50/50 Sale:', response.data);
     return response.data;
   } catch (error) {
     console.error('❌ Failed to connect salon:', error);

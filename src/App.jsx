@@ -40,6 +40,7 @@ const SimpleSale = lazy(() => import('./pages/SimpleSale'));
 const FiftyFiftySale = lazy(() => import('./pages/FiftyFiftySale'));
 const AccessorySale = lazy(() => import('./pages/AccessorySale'));
 const FiftyFiftyNoSalon = lazy(() => import('./pages/FiftyFiftyNoSalon'));
+const FiftyFiftyNoSalonDetails = lazy(() => import('./pages/FiftyFiftyNoSalonDetails'));
 const SalonOrderPlacement = lazy(() => import('./pages/SalonOrderPlacement'));
 const SalonShipments = lazy(() => import('./pages/SalonShipments'));
 const SalonStatistics = lazy(() => import('./pages/SalonStatistics'));
@@ -288,6 +289,14 @@ function App() {
           element={
             <ProtectedRoute>
               <FiftyFiftyNoSalon />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/salon/fifty-fifty-no-salon/:id"
+          element={
+            <ProtectedRoute>
+              <FiftyFiftyNoSalonDetails />
             </ProtectedRoute>
           }
         />

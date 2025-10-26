@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
+import { useDebounce } from '../hooks/useDebounce';
 import { getAllSalons } from '../services/salonApi';
 import { getImageUrl } from '../services/api';
 import { useKeyboard } from '../context/KeyboardContext';
@@ -11,31 +12,31 @@ const SalonsList = () => {
   const { showKeyboard } = useKeyboard();
 
   const [salons, setSalons] = useState([]);
-  const [filteredSalons, setFilteredSalons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Debounce search query to reduce re-renders (optimization for weak PC)
+  const debouncedSearch = useDebounce(searchQuery, 300);
 
   useEffect(() => {
     fetchSalons();
   }, []);
 
-  useEffect(() => {
-    if (!searchQuery.trim()) {
-      setFilteredSalons(salons);
-      return;
+  // Memoized filtered data (optimization for weak PC)
+  const filteredSalons = useMemo(() => {
+    if (!debouncedSearch.trim()) {
+      return salons;
     }
 
-    const query = searchQuery.toLowerCase();
-    const filtered = salons.filter(salon => {
+    const query = debouncedSearch.toLowerCase();
+    return salons.filter(salon => {
       const salonName = salon.salon_name?.toLowerCase() || '';
       const customerName = salon.customer_name?.toLowerCase() || '';
 
       return salonName.includes(query) || customerName.includes(query);
     });
-
-    setFilteredSalons(filtered);
-  }, [searchQuery, salons]);
+  }, [debouncedSearch, salons]);
 
   const fetchSalons = async () => {
     setLoading(true);
@@ -44,7 +45,6 @@ const SalonsList = () => {
     try {
       const data = await getAllSalons();
       setSalons(data || []);
-      setFilteredSalons(data || []);
       console.log('🏪 Fetched Salons:', data);
     } catch (err) {
       console.error('❌ Failed to fetch salons:', err);
@@ -159,6 +159,7 @@ const SalonsList = () => {
                     <img
                       src={getImageUrl(salon.salon_image)}
                       alt={salon.salon_name}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   ) : (

@@ -69,60 +69,49 @@ const SalonHome = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header with 3 main links + Profile */}
-      <div className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-8 py-3">
-          <div className="flex items-center justify-between">
-            {/* Left side - 3 main navigation links */}
-            <div className="flex items-center gap-6">
-              <h1 className="text-2xl font-semibold text-gray-900 mr-4">
-                {t.salon || 'Salon'}
-              </h1>
-              <button
-                onClick={() => navigate('/salon/home')}
-                className="h-12 px-6 rounded-lg font-medium transition-all
-                  bg-blue-500 text-white border-2 border-blue-500
-                  active:scale-[0.98] active:bg-blue-600"
-              >
-                {t.sales || 'Sotuv'}
-              </button>
-              <button
-                onClick={() => navigate('/salon/statistics')}
-                className="h-12 px-6 rounded-lg font-medium transition-all
-                  bg-white text-gray-700 border-2 border-gray-200
-                  active:scale-[0.98] active:border-blue-500"
-              >
-                {t.statistics || 'Statistika'}
-              </button>
-              <button
-                onClick={() => navigate('/salon/reports')}
-                className="h-12 px-6 rounded-lg font-medium transition-all
-                  bg-white text-gray-700 border-2 border-gray-200
-                  active:scale-[0.98] active:border-blue-500"
-              >
-                {t.reports || 'Hisobot'}
-              </button>
-            </div>
+      {/* Header */}
+      <div className="sticky top-0 z-10 bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-8 py-3 flex justify-between items-center">
+          <h1 className="text-2xl font-semibold text-gray-900">
+            {t.salon || 'Salon'}
+          </h1>
 
-            {/* Right side - Profile button */}
+          {/* Navigation Links */}
+          <div className="flex gap-2">
             <button
-              onClick={() => navigate('/profile')}
-              className="w-14 h-14 rounded-full bg-gray-900 shadow-md
-                flex items-center justify-center text-2xl
-                active:scale-[0.98] transition-all"
+              onClick={() => navigate('/salon/home')}
+              className="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium shadow-md"
             >
-              👤
+              {t.sales || 'Sotuv'}
+            </button>
+            <button
+              onClick={() => navigate('/salon/statistics')}
+              className="px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-medium
+                active:scale-[0.98] active:border-blue-500 transition-all"
+            >
+              {t.statistics || 'Statistika'}
+            </button>
+            <button
+              onClick={() => navigate('/salon/reports')}
+              className="px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-medium
+                active:scale-[0.98] active:border-blue-500 transition-all"
+            >
+              {t.reports || 'Hisobot'}
             </button>
           </div>
+
+          <button
+            onClick={() => navigate('/profile')}
+            className="w-14 h-14 rounded-full bg-gray-900 active:bg-gray-700
+              flex items-center justify-center text-2xl transition-colors"
+          >
+            👤
+          </button>
         </div>
       </div>
 
       {/* Main Content - Sales Actions Grid */}
       <div className="max-w-7xl mx-auto px-8 py-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-6">
-          {t.salesQuickActions || 'Sotuv bo\'limi'}
-        </h2>
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {salesActions.map((action) => (
             <button

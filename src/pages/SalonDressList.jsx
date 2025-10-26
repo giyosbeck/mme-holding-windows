@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
+import { useDebounce } from '../hooks/useDebounce';
 import { getAllDressesOrderedByDate } from '../services/salonApi';
 import { getImageUrl } from '../services/api';
 import { useKeyboard } from '../context/KeyboardContext';
@@ -11,8 +12,6 @@ const SalonDressList = () => {
   const { showKeyboard } = useKeyboard();
 
   const [dressesGrouped, setDressesGrouped] = useState({});
-  const [allDresses, setAllDresses] = useState([]);
-  const [filteredGrouped, setFilteredGrouped] = useState({});
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,17 +20,20 @@ const SalonDressList = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentDressImages, setCurrentDressImages] = useState([]);
 
+  // Debounce search query to reduce re-renders (optimization for weak PC)
+  const debouncedSearch = useDebounce(searchQuery, 300);
+
   useEffect(() => {
     fetchDresses();
   }, []);
 
-  useEffect(() => {
-    if (!searchQuery.trim()) {
-      setFilteredGrouped(dressesGrouped);
-      return;
+  // Memoized filtered data (optimization for weak PC)
+  const filteredGrouped = useMemo(() => {
+    if (!debouncedSearch.trim()) {
+      return dressesGrouped;
     }
 
-    const query = searchQuery.toLowerCase();
+    const query = debouncedSearch.toLowerCase();
     const filtered = {};
 
     // Filter dresses within each date group
@@ -51,8 +53,8 @@ const SalonDressList = () => {
       }
     });
 
-    setFilteredGrouped(filtered);
-  }, [searchQuery, dressesGrouped]);
+    return filtered;
+  }, [debouncedSearch, dressesGrouped]);
 
   const fetchDresses = async () => {
     setLoading(true);
@@ -64,12 +66,7 @@ const SalonDressList = () => {
 
       if (response && response.data) {
         setDressesGrouped(response.data);
-        setFilteredGrouped(response.data);
         setTotalCount(response.count || 0);
-
-        // Flatten for total count
-        const flattened = Object.values(response.data).flat();
-        setAllDresses(flattened);
       }
     } catch (err) {
       console.error('❌ Failed to fetch dresses:', err);
@@ -79,28 +76,30 @@ const SalonDressList = () => {
     }
   };
 
-  // Use filteredGrouped directly - no need to re-group
-  const groupedDresses = filteredGrouped;
-
-  const handleImageClick = (images, index) => {
+  // Memoized image handlers (optimization for weak PC)
+  const handleImageClick = useCallback((images, index) => {
     setCurrentDressImages(images);
     setCurrentImageIndex(index);
     setFullscreenImage(images[index]);
-  };
+  }, []);
 
-  const handlePrevImage = (e) => {
+  const handlePrevImage = useCallback((e) => {
     e.stopPropagation();
-    const newIndex = currentImageIndex === 0 ? currentDressImages.length - 1 : currentImageIndex - 1;
-    setCurrentImageIndex(newIndex);
-    setFullscreenImage(currentDressImages[newIndex]);
-  };
+    setCurrentImageIndex(prev => {
+      const newIndex = prev === 0 ? currentDressImages.length - 1 : prev - 1;
+      setFullscreenImage(currentDressImages[newIndex]);
+      return newIndex;
+    });
+  }, [currentDressImages]);
 
-  const handleNextImage = (e) => {
+  const handleNextImage = useCallback((e) => {
     e.stopPropagation();
-    const newIndex = currentImageIndex === currentDressImages.length - 1 ? 0 : currentImageIndex + 1;
-    setCurrentImageIndex(newIndex);
-    setFullscreenImage(currentDressImages[newIndex]);
-  };
+    setCurrentImageIndex(prev => {
+      const newIndex = prev === currentDressImages.length - 1 ? 0 : prev + 1;
+      setFullscreenImage(currentDressImages[newIndex]);
+      return newIndex;
+    });
+  }, [currentDressImages]);
 
   const formatPrice = (price) => {
     return '$' + new Intl.NumberFormat('en-US').format(price);
@@ -174,7 +173,7 @@ const SalonDressList = () => {
           </div>
         )}
 
-        {Object.keys(groupedDresses).length === 0 ? (
+        {Object.keys(filteredGrouped).length === 0 ? (
           <div className="bg-white rounded-2xl border-2 border-gray-200 p-16 text-center shadow-md">
             <div className="text-6xl mb-6">👗</div>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">
@@ -185,7 +184,7 @@ const SalonDressList = () => {
             </p>
           </div>
         ) : (
-          Object.entries(groupedDresses).map(([date, dressesForDate]) => (
+          Object.entries(filteredGrouped).map(([date, dressesForDate]) => (
             <div key={date} className="mb-10">
               {/* Date Header */}
               <h2 className="text-xl font-semibold text-gray-700 mb-4 pl-2">
@@ -207,6 +206,7 @@ const SalonDressList = () => {
                         <img
                           src={getImageUrl(dress.dress_image[0])}
                           alt={dress.dress_name}
+                          loading="lazy"
                           className="w-full h-full object-cover"
                           onClick={(e) => {
                             e.stopPropagation();

@@ -254,6 +254,7 @@ const SalonOrderPlacement = () => {
                     <img
                       src={getImageUrl(selectedDress.dress_image)}
                       alt={selectedDress.dress_name}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   ) : (

@@ -163,36 +163,32 @@ const SalonDressDetails = () => {
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-8">
-          <div className="flex gap-2">
-            <button
-              onClick={() => setActiveTab('gallery')}
-              className={`px-8 h-14 font-medium transition-all ${
-                activeTab === 'gallery'
-                  ? 'border-b-4 border-blue-500 text-blue-600'
-                  : 'text-gray-600 active:text-blue-600'
-              }`}
-            >
-              {t.gallery || 'Gallery'}
-            </button>
-            <button
-              onClick={() => setActiveTab('about')}
-              className={`px-8 h-14 font-medium transition-all ${
-                activeTab === 'about'
-                  ? 'border-b-4 border-blue-500 text-blue-600'
-                  : 'text-gray-600 active:text-blue-600'
-              }`}
-            >
-              {t.about || 'About'}
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* Tab Content */}
-      <div className="max-w-7xl mx-auto px-8 py-8">
+      <div className="max-w-7xl mx-auto px-8 pt-6">
+        {/* Tabs */}
+        <div className="flex gap-4 mb-6">
+          <button
+            onClick={() => setActiveTab('gallery')}
+            className={`px-8 py-4 rounded-xl font-semibold text-lg transition-all shadow-md
+              ${activeTab === 'gallery'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white border-2 border-gray-200 text-gray-700 active:scale-[0.98] active:border-blue-500'
+              }`}
+          >
+            {t.gallery || 'Gallery'}
+          </button>
+          <button
+            onClick={() => setActiveTab('about')}
+            className={`px-8 py-4 rounded-xl font-semibold text-lg transition-all shadow-md
+              ${activeTab === 'about'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white border-2 border-gray-200 text-gray-700 active:scale-[0.98] active:border-blue-500'
+              }`}
+          >
+            {t.about || 'About'}
+          </button>
+        </div>
+
         {activeTab === 'gallery' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {dressData.dress_image && dressData.dress_image.length > 0 ? (
@@ -209,6 +205,7 @@ const SalonDressDetails = () => {
                     <img
                       src={getImageUrl(image)}
                       alt={`${dressData.dress_name} - ${index + 1}`}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </div>

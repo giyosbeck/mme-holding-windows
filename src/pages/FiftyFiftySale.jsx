@@ -328,6 +328,7 @@ const FiftyFiftySale = () => {
                     <img
                       src={getImageUrl(selectedDress.dress_image[0])}
                       alt={selectedDress.dress_name}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   ) : (

@@ -11,24 +11,38 @@ const SalonReports = () => {
       {/* Header */}
       <div className="sticky top-0 z-10 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-8 py-3 flex justify-between items-center">
-          <div className="flex items-center gap-4">
+          <h1 className="text-2xl font-semibold text-gray-900">
+            {t.salon || 'Salon'}
+          </h1>
+
+          {/* Navigation Links */}
+          <div className="flex gap-2">
             <button
               onClick={() => navigate('/salon/home')}
-              className="w-14 h-14 rounded-full border-2 border-gray-200
-                flex items-center justify-center text-2xl
+              className="px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-medium
                 active:scale-[0.98] active:border-blue-500 transition-all"
             >
-              ←
+              {t.sales || 'Sotuv'}
             </button>
-            <h1 className="text-2xl font-semibold text-gray-900">
+            <button
+              onClick={() => navigate('/salon/statistics')}
+              className="px-6 py-3 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-medium
+                active:scale-[0.98] active:border-blue-500 transition-all"
+            >
+              {t.statistics || 'Statistika'}
+            </button>
+            <button
+              onClick={() => navigate('/salon/reports')}
+              className="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium shadow-md"
+            >
               {t.reports || 'Hisobot'}
-            </h1>
+            </button>
           </div>
+
           <button
             onClick={() => navigate('/profile')}
-            className="w-14 h-14 rounded-full bg-gray-900
-              flex items-center justify-center text-2xl
-              active:scale-[0.98] transition-all"
+            className="w-14 h-14 rounded-full bg-gray-900 active:bg-gray-700
+              flex items-center justify-center text-2xl transition-colors"
           >
             👤
           </button>
