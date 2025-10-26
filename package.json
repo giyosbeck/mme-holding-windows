@@ -3,7 +3,7 @@
   "productName": "MME Warehouse",
   "description": "MME Holding warehouse and factory management system for POS devices",
   "author": "MME Holding",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "type": "module",
   "main": "electron/main.cjs",

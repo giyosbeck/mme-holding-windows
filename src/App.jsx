@@ -57,7 +57,22 @@ const PageLoader = () => (
 );
 
 function App() {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, user } = useAuthStore();
+
+  // Determine home route based on role
+  const getHomeRoute = () => {
+    if (!isAuthenticated || !user?.role) return '/';
+
+    switch (user.role) {
+      case 'FACTORY_MANAGER':
+        return '/factory-manager/home';
+      case 'SALON':
+        return '/salon/home';
+      case 'WAREHOUSE':
+      default:
+        return '/home';
+    }
+  };
 
   return (
     <KeyboardProvider>
@@ -67,7 +82,7 @@ function App() {
         {/* Public Routes */}
         <Route
           path="/"
-          element={isAuthenticated ? <Navigate to="/home" replace /> : <PhoneInput />}
+          element={isAuthenticated ? <Navigate to={getHomeRoute()} replace /> : <PhoneInput />}
         />
         <Route path="/otp" element={<OTPVerify />} />
 
@@ -336,7 +351,7 @@ function App() {
         {/* Catch all - redirect to home or login */}
         <Route
           path="*"
-          element={<Navigate to={isAuthenticated ? "/home" : "/"} replace />}
+          element={<Navigate to={isAuthenticated ? getHomeRoute() : "/"} replace />}
         />
           </Routes>
         </Suspense>
