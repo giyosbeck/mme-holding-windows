@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
 import { getOrderDetails, markOrderReady } from '../services/factoryManagerApi';
 import { getImageUrl } from '../services/api';
+import FullscreenImageViewer from '../components/FullscreenImageViewer';
 
 const OrderDetails = () => {
   const navigate = useNavigate();
@@ -31,6 +32,17 @@ const OrderDetails = () => {
   useEffect(() => {
     fetchOrderDetails();
   }, [id]);
+
+  // Combine dress_images and order_dress_images when orderData changes
+  useEffect(() => {
+    if (orderData) {
+      const combinedImages = [
+        ...(orderData.dress_images || []),
+        ...(orderData.order_dress_images || [])
+      ];
+      setAllImages(combinedImages);
+    }
+  }, [orderData]);
 
   const fetchOrderDetails = async () => {
     setLoading(true);
@@ -130,22 +142,6 @@ const OrderDetails = () => {
     return phone;
   };
 
-  // Fullscreen image navigation
-  const handlePrevImage = () => {
-    const newIndex = fullscreenIndex > 0 ? fullscreenIndex - 1 : allImages.length - 1;
-    setFullscreenIndex(newIndex);
-    setFullscreenImage(allImages[newIndex]);
-  };
-
-  const handleNextImage = () => {
-    const newIndex = fullscreenIndex < allImages.length - 1 ? fullscreenIndex + 1 : 0;
-    setFullscreenIndex(newIndex);
-    setFullscreenImage(allImages[newIndex]);
-  };
-
-  const handleCloseFullscreen = () => {
-    setFullscreenImage(null);
-  };
 
   if (loading) {
     return (
@@ -319,48 +315,35 @@ const OrderDetails = () => {
         {/* Gallery Tab Content */}
         {activeTab === 'gallery' && (
           <div>
-            {(() => {
-              // Combine dress_images and order_dress_images
-              const imagesList = [
-                ...(orderData.dress_images || []),
-                ...(orderData.order_dress_images || [])
-              ];
-
-              // Update allImages state when images change
-              if (imagesList.length !== allImages.length) {
-                setAllImages(imagesList);
-              }
-
-              return imagesList.length > 0 ? (
-                <div className="grid grid-cols-2 gap-6">
-                  {imagesList.map((image, index) => (
-                    <div
-                      key={index}
-                      className="bg-white border-2 border-gray-200 rounded-2xl p-4 shadow-md
-                        cursor-pointer active:scale-[0.98] transition-transform"
-                      onClick={() => {
-                        setFullscreenIndex(index);
-                        setFullscreenImage(image);
+            {allImages.length > 0 ? (
+              <div className="grid grid-cols-2 gap-6">
+                {allImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="bg-white border-2 border-gray-200 rounded-2xl p-4 shadow-md
+                      cursor-pointer active:scale-[0.98] transition-transform"
+                    onClick={() => {
+                      setFullscreenIndex(index);
+                      setFullscreenImage(true);
+                    }}
+                  >
+                    <img
+                      src={getImageUrl(image)}
+                      alt={`Order image ${index + 1}`}
+                      className="w-full h-96 object-cover rounded-lg active:opacity-80 transition-opacity"
+                      onError={(e) => {
+                        console.error('❌ Image failed to load:', image);
+                        e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23ddd" width="400" height="400"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle"%3ENo Image%3C/text%3E%3C/svg%3E';
                       }}
-                    >
-                      <img
-                        src={getImageUrl(image)}
-                        alt={`Order image ${index + 1}`}
-                        className="w-full h-96 object-cover rounded-lg active:opacity-80 transition-opacity"
-                        onError={(e) => {
-                          console.error('❌ Image failed to load:', image);
-                          e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23ddd" width="400" height="400"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle"%3ENo Image%3C/text%3E%3C/svg%3E';
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="bg-white border-2 border-gray-200 rounded-2xl p-12 text-center">
-                  <div className="text-gray-500 text-xl">{t.noImages}</div>
-                </div>
-              );
-            })()}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="bg-white border-2 border-gray-200 rounded-2xl p-12 text-center">
+                <div className="text-gray-500 text-xl">{t.noImages}</div>
+              </div>
+            )}
           </div>
         )}
 
@@ -426,66 +409,14 @@ const OrderDetails = () => {
         </div>
       )}
 
-      {/* Fullscreen Image Viewer Modal */}
+      {/* Fullscreen Image Viewer with Zoom */}
       {fullscreenImage && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-          onClick={handleCloseFullscreen}
-        >
-          {/* Close Button */}
-          <button
-            onClick={handleCloseFullscreen}
-            className="absolute top-4 right-4 w-14 h-14 rounded-full bg-white/10
-              flex items-center justify-center text-white text-3xl font-bold
-              active:bg-white/20 transition-colors z-10"
-          >
-            ✕
-          </button>
-
-          {/* Image Counter */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2
-            bg-white/10 px-6 py-3 rounded-full text-white text-lg font-semibold">
-            {fullscreenIndex + 1} / {allImages.length}
-          </div>
-
-          {/* Previous Button */}
-          {allImages.length > 1 && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePrevImage();
-              }}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2
-                w-16 h-32 bg-white/10 rounded-lg flex items-center justify-center
-                text-white text-4xl font-bold active:bg-white/20 transition-colors"
-            >
-              ‹
-            </button>
-          )}
-
-          {/* Main Image */}
-          <img
-            src={getImageUrl(fullscreenImage)}
-            alt={`Fullscreen image ${fullscreenIndex + 1}`}
-            className="max-w-[90%] max-h-[90%] object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-
-          {/* Next Button */}
-          {allImages.length > 1 && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleNextImage();
-              }}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2
-                w-16 h-32 bg-white/10 rounded-lg flex items-center justify-center
-                text-white text-4xl font-bold active:bg-white/20 transition-colors"
-            >
-              ›
-            </button>
-          )}
-        </div>
+        <FullscreenImageViewer
+          images={allImages}
+          currentIndex={fullscreenIndex}
+          onClose={() => setFullscreenImage(false)}
+          onNavigate={setFullscreenIndex}
+        />
       )}
 
       {/* Success Modal */}

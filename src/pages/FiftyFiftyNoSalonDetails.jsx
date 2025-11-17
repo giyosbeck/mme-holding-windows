@@ -5,6 +5,7 @@ import { useKeyboard } from '../context/KeyboardContext';
 import { getFiftyFiftyNoSalonDetails, connectSalonToFiftyFifty, getUSDExchangeRate } from '../services/salonApi';
 import { getImageUrl } from '../services/api';
 import SalonSelectionModal from '../components/SalonSelectionModal';
+import FullscreenImageViewer from '../components/FullscreenImageViewer';
 
 const FiftyFiftyNoSalonDetails = () => {
   const { id } = useParams();
@@ -74,21 +75,7 @@ const FiftyFiftyNoSalonDetails = () => {
 
   const handleImageClick = (index) => {
     setCurrentImageIndex(index);
-    setFullscreenImage(saleData.dress_images[index]);
-  };
-
-  const handlePrevImage = (e) => {
-    e.stopPropagation();
-    const newIndex = currentImageIndex === 0 ? saleData.dress_images.length - 1 : currentImageIndex - 1;
-    setCurrentImageIndex(newIndex);
-    setFullscreenImage(saleData.dress_images[newIndex]);
-  };
-
-  const handleNextImage = (e) => {
-    e.stopPropagation();
-    const newIndex = currentImageIndex === saleData.dress_images.length - 1 ? 0 : currentImageIndex + 1;
-    setCurrentImageIndex(newIndex);
-    setFullscreenImage(saleData.dress_images[newIndex]);
+    setFullscreenImage(true);
   };
 
   const handleAttachSalon = async () => {
@@ -578,56 +565,14 @@ const FiftyFiftyNoSalonDetails = () => {
         }}
       />
 
-      {/* Fullscreen Image Modal */}
+      {/* Fullscreen Image Viewer with Zoom */}
       {fullscreenImage && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center"
-          onClick={() => setFullscreenImage(null)}
-        >
-          <button
-            onClick={() => setFullscreenImage(null)}
-            className="absolute top-6 right-6 w-14 h-14 rounded-full bg-white text-black
-              flex items-center justify-center text-2xl z-10
-              active:scale-[0.98] transition-all"
-          >
-            ✕
-          </button>
-
-          {saleData.dress_images && saleData.dress_images.length > 1 && (
-            <>
-              <button
-                onClick={handlePrevImage}
-                className="absolute left-6 w-14 h-14 rounded-full bg-white text-black
-                  flex items-center justify-center text-2xl z-10
-                  active:scale-[0.98] transition-all"
-              >
-                ←
-              </button>
-              <button
-                onClick={handleNextImage}
-                className="absolute right-6 w-14 h-14 rounded-full bg-white text-black
-                  flex items-center justify-center text-2xl z-10
-                  active:scale-[0.98] transition-all"
-              >
-                →
-              </button>
-            </>
-          )}
-
-          <img
-            src={getImageUrl(fullscreenImage)}
-            alt="Fullscreen"
-            className="max-w-[90%] max-h-[90%] object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-
-          {saleData.dress_images && saleData.dress_images.length > 1 && (
-            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2
-              bg-white bg-opacity-90 px-4 py-2 rounded-full text-black">
-              {currentImageIndex + 1} / {saleData.dress_images.length}
-            </div>
-          )}
-        </div>
+        <FullscreenImageViewer
+          images={saleData.dress_images}
+          currentIndex={currentImageIndex}
+          onClose={() => setFullscreenImage(false)}
+          onNavigate={setCurrentImageIndex}
+        />
       )}
     </div>
   );

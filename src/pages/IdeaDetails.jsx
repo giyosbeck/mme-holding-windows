@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
 import { getIdeaDetails, transferIdeaToDress } from '../services/factoryManagerApi';
 import { getImageUrl } from '../services/api';
+import FullscreenImageViewer from '../components/FullscreenImageViewer';
 
 const IdeaDetails = () => {
   const { id } = useParams();
@@ -198,27 +199,13 @@ const IdeaDetails = () => {
         </div>
       </div>
 
-      {/* Fullscreen Image Viewer */}
-      {fullscreenImage && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-          onClick={() => setFullscreenImage(null)}
-        >
-          <img
-            src={getImageUrl(fullscreenImage)}
-            alt="Fullscreen"
-            className="max-w-[90%] max-h-[90%] object-contain"
-          />
-
-          {/* Close Button */}
-          <button
-            onClick={() => setFullscreenImage(null)}
-            className="absolute top-8 right-8 text-white text-4xl font-bold
-              active:scale-90 transition-transform"
-          >
-            ✕
-          </button>
-        </div>
+      {/* Fullscreen Image Viewer with Zoom */}
+      {fullscreenImage && ideaData?.idea_image && (
+        <FullscreenImageViewer
+          images={ideaData.idea_image}
+          currentIndex={0}
+          onClose={() => setFullscreenImage(null)}
+        />
       )}
 
       {/* Reject Confirmation Modal */}

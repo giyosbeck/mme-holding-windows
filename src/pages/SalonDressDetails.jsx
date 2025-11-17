@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from '../hooks/useTranslation';
 import { getDressById, deleteDress, deleteDressImage } from '../services/salonApi';
 import { getImageUrl } from '../services/api';
+import FullscreenImageViewer from '../components/FullscreenImageViewer';
 
 const SalonDressDetails = () => {
   const { id } = useParams();
@@ -55,21 +56,7 @@ const SalonDressDetails = () => {
 
   const handleImageClick = (index) => {
     setCurrentImageIndex(index);
-    setFullscreenImage(dressData.dress_image[index]);
-  };
-
-  const handlePrevImage = (e) => {
-    e.stopPropagation();
-    const newIndex = currentImageIndex === 0 ? dressData.dress_image.length - 1 : currentImageIndex - 1;
-    setCurrentImageIndex(newIndex);
-    setFullscreenImage(dressData.dress_image[newIndex]);
-  };
-
-  const handleNextImage = (e) => {
-    e.stopPropagation();
-    const newIndex = currentImageIndex === dressData.dress_image.length - 1 ? 0 : currentImageIndex + 1;
-    setCurrentImageIndex(newIndex);
-    setFullscreenImage(dressData.dress_image[newIndex]);
+    setFullscreenImage(true);
   };
 
   const handleDeleteImage = async () => {
@@ -396,56 +383,14 @@ const SalonDressDetails = () => {
         </div>
       )}
 
-      {/* Fullscreen Image Modal */}
+      {/* Fullscreen Image Viewer with Zoom */}
       {fullscreenImage && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center"
-          onClick={() => setFullscreenImage(null)}
-        >
-          <button
-            onClick={() => setFullscreenImage(null)}
-            className="absolute top-6 right-6 w-14 h-14 rounded-full bg-white text-black
-              flex items-center justify-center text-2xl z-10
-              active:scale-[0.98] transition-all"
-          >
-            ✕
-          </button>
-
-          {dressData.dress_image.length > 1 && (
-            <>
-              <button
-                onClick={handlePrevImage}
-                className="absolute left-6 w-14 h-14 rounded-full bg-white text-black
-                  flex items-center justify-center text-2xl z-10
-                  active:scale-[0.98] transition-all"
-              >
-                ←
-              </button>
-              <button
-                onClick={handleNextImage}
-                className="absolute right-6 w-14 h-14 rounded-full bg-white text-black
-                  flex items-center justify-center text-2xl z-10
-                  active:scale-[0.98] transition-all"
-              >
-                →
-              </button>
-            </>
-          )}
-
-          <img
-            src={getImageUrl(fullscreenImage)}
-            alt="Fullscreen"
-            className="max-w-[90%] max-h-[90%] object-contain"
-            onClick={(e) => e.stopPropagation()}
-          />
-
-          {dressData.dress_image.length > 1 && (
-            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2
-              bg-white bg-opacity-90 px-4 py-2 rounded-full text-black">
-              {currentImageIndex + 1} / {dressData.dress_image.length}
-            </div>
-          )}
-        </div>
+        <FullscreenImageViewer
+          images={dressData.dress_image}
+          currentIndex={currentImageIndex}
+          onClose={() => setFullscreenImage(false)}
+          onNavigate={setCurrentImageIndex}
+        />
       )}
     </div>
   );
